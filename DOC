@@ -1,0 +1,307 @@
+nodes Server.js
+
+
+start serv :
+tmux new -s WebServ
+cd usr/WebServ/
+node Server.js
+
+
+bonus : 
+attach : tmux a -t WebServ
+kill : tmux kill-session -t WebServ
+
+
+==========
+pour l'instant pas de socketio sur le serv
+
+
+
+https://grid.malven.co/
+
+https://colorgradient.dev/gradient-generator
+
+https://cssgradient.io/
+
+https://yoksel.github.io/url-encoder/
+
+https://bennettfeely.com/clippy/
+
+https://9elements.github.io/fancy-border-radius/#100.53.100.53--.
+
+https://www.shapedivider.app/
+
+https://app.haikei.app/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ASCIIMATH script:
+document.getElementById("demoRendering").style.width = 90+"vw";
+document.getElementById("wrapper").style.margin = 0;
+document.getElementById("wrapper").style.padding = 0;
+document.getElementById("wrapper").style.width = 100 + "vw";
+document.getElementsByClassName("rightColumn")[0].style.width = 100 + "vw";
+document.getElementById("demoRendering").style.width = 100 + "vw";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+marion :
+css
+/*
+je sais pas ce que tu veux comme responsivité des images.
+si tu veux qu'elles restent en carré, met "aspect-ratio : 1/1;" (mis)
+sinon tu peux les blocs avec max et min
+
+pareil pour le texte tu peux passer l'overflow en hidden pour pas que ca crache.
+
+dis moi si tu veux que je te rajoutes des trucs ou si y a qqchose qui correspond pas a tes envies  <3 
+
+je te nem, tu geres tartiflette  <3 
+
+flexbox cheat sheet:
+https://yoksel.github.io/flex-cheatsheet/
+https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+*/
+
+
+
+
+* {
+  border: 0;
+  margin : 0;
+  --card-gap: 20px; /*l'espace entre ton image et ton texte*/
+  --card-topbot-padding: 15px;/*pour le dessus et le dessous*/
+  --card-side-padding: 15px;/*pour les cotés*/
+  --see-more-padding: 10%;/*le décalage pour ton en lire plus*/
+}
+
+body {
+  background: #0c222f;/*marine nw*/
+}
+
+section {/*parametre de la section pour que ca soit bien présenter, sert a rien*/
+  display: flex;/*flexbox*/
+  height: 100vh;/*pour que ca fill toute le viewport, pas nécessaire chez toi*/
+  align-content: stretch;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center
+}
+
+
+.card {  /*ta carte est ici*/
+  /*ton padding geres l'espace sur les cotés entre ton contenu (texte et image) et le bord de ta card*/
+  padding: var(--card-topbot-padding) var(--card-side-padding)  var(--card-topbot-padding) var(--card-side-padding);
+  /*j'aimgine que la largeur est dans cet ordre de grandeur, ca pilote la taille maximale de ta card*/
+  max-width: 90vw;
+  /*créé la flex box a l'interieur de la card*/
+  display: flex;
+  /*le gap controle l'espace entre les éléments de ta flexbox, ici ca seras l'espace entre ton texte et ton image*/
+  gap: var(--card-gap);
+  /*ceux la je pense que tu connais*/
+  background-color: white;
+  border-radius: 10px
+}
+
+
+img {
+  /*aspect ratio fait en sorte que ton image garde son aspect carré*/
+  aspect-ratio: 1/1;
+  /*tes bords rond*/
+  border-radius: 10px
+}
+
+
+
+p, h3 { /*parametre de ton texte, je pense quetu as deja ca*/
+  color : black;
+  white-space: wrap
+}
+
+.text-container {/*voila la div qui contiens ton titre, ta description et ton en lire plus...*/
+  /*flexbox*/
+  display: flex;
+  /*passe la flexbox en colonne*/
+  flex-direction: column;
+  /*justify-content dis de quel facon placer tes elements dans la flexbox. la on veut que le titre soit en haut, la desciptio au milieu et le en lire plus en bas. On utilise donc space-between. Si tu veux que ta description sois en dessous de to titre et le en lire plus en bas, il faudrait que tu mette to titre et ta description dans une div qui les continnent tous les deux*/
+  justify-content: space-between
+}
+
+.see-more {
+  /*place ton texte a droit*/
+  text-align: right;
+  /*gere l'offset de ton texte suivant ton bord droit*/
+  padding-right: var(--see-more-padding)
+}
+
+
+/*flexbox cards
+
+si tu veux voir ce qu'elle fait, il y a des card commenté dans l'html, supprime les balises de commentaire, et la page va te les afficher (apres qq secones)
+
+*/
+
+.card-container{
+  /*gere la gap entre tes cards, ici l'espace au dessus et en dessous*/
+  --card-column-gap: 12px;
+  display: flex;/*flexbox*/
+  flex-direction: column;/*passe la flexbox en colonne*/
+  flex-wrap: wrap;/*permet de pas faire disparaitre les cartes si il y a pas assez d'espace*/
+  gap: var(--card-column-gap);
+}
+
+
+
+
+
+
+
+
+
+HTML
+
+<section>
+<div class="card-container">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- début de ta carte ici -->
+  <div class="card" href="">
+    
+    <img class="image" src ="https://mathcurve.com/polyedres/carre/carre.gif"></img>
+  
+  
+  
+    <div class="text-container">
+      <h3> " Ceci est un titre oui oui"</h3>
+      <p>
+        Sorti de l'espace monstrueux entre la banane et le cocotié, la grande magie de l'univers a fait que le saint vers de             terre soit un sorcier plus puissant que harry la poe de terre
+      </p>
+      <p class="see-more"> en lire plus...</p>
+    </div>
+  </div>
+  <!-- fin de ta carte ici -->
+  
+  
+  
+  
+  
+  
+  
+<!-- flex box autres cartes-->
+<!--
+    <div class="card" href="">
+    
+    <img class="image" src ="https://mathcurve.com/polyedres/carre/carre.gif"></img>
+  
+  
+  
+    <div class="text-container">
+      <h3> " Ceci est un titre oui oui"</h3>
+      <p>
+        Sorti de l'espace monstrueux entre la banane et le cocotié, la grande magie de l'univers a fait que le saint vers de             terre soit un sorcier plus puissant que harry la poe de terre
+      </p>
+      <p class="see-more"> en lire plus...</p>
+    </div>
+  </div>
+  
+  
+  
+    <div class="card" href="">
+    
+    <img class="image" src ="https://mathcurve.com/polyedres/carre/carre.gif"></img>
+  
+  
+  
+    <div class="text-container">
+      <h3> " Ceci est un titre oui oui"</h3>
+      <p>
+        Sorti de l'espace monstrueux entre la banane et le cocotié, la grande magie de l'univers a fait que le saint vers de             terre soit un sorcier plus puissant que harry la poe de terre
+      </p>
+      <p class="see-more"> en lire plus...</p>
+    </div>
+  </div>
+  -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+</section>

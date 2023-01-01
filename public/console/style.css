@@ -1,0 +1,32 @@
+
+
+
+.messageinput{
+  resize: none;
+  position:fixed;
+  right:30%;
+  left:2%;
+  bottom:2%;
+  top:90%;
+}
+
+
+.consoleoutput{
+  resize: none;
+  position:fixed;
+  right:2%;
+  left:2%;
+  bottom:12%;
+  top:2%;
+}
+
+
+
+
+.sendbutton{
+  position:fixed;
+  right:2%;
+  left:72%;
+  bottom:2%;
+  top:90%;
+}

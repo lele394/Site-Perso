@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cellular Automaton</title>
+    <link rel="stylesheet" href="ArticleStyle.css" />
+    <link rel="stylesheet" href="../style/footerStyle.css" />
+    <link rel="icon" href="/public/NW-favicon.png" />
+  </head>
+  <body>
+    <div class="top-banner">
+      <img
+        src="../img/NW-logo.jpg"
+        class="logo"
+        onclick="location.href='/public/alpha/alpha.html'"
+      />
+    </div>
+
+    <div class="core">
+      <h1>
+        CETTE PAGE N'EST PAS TERMINÉE ATTENDEZ VOUS A DES ERREURS/PAS PROOFREAD
+        L'orthographe risque de vous faire pleurer.
+      </h1>
+      <h1>Cellular Automaton</h1>
+      <p class="resume">
+        Cet article présente le concept d'un automate cellulaire. Le projet
+        réalisé est disponible sur
+        <a
+          href="https://github.com/lele394/Cellular-Automata/blob/main/CellularAutomaton.py"
+          >github</a
+        >. On y discute ici le programme python créé, ainsi que ses capacités,
+        limitations, et éventuel bugs.
+      </p>
+      <h2>Introduction</h2>
+      <p>
+        Un automaton cellulaire est une grille constituée de "cellules". Un set
+        de règles simples est attribué à chacune d'entre elles. On simule alors
+        l'évolution de du système en appliquant ce set de règles afin d'obtenir
+        l'état de chaque cellule à l'étape suivante. Étudiés en mathématiques
+        ainsi qu'en informatique, les automatons surprennent par les complexités
+        qu'ils peuvent atteindre en partant de règles simples.
+      </p>
+      <br />
+      <p>
+        L'automaton le plus connu au jour d'aujourd'hui est sans doutes le
+        Conway's Game of Life.
+      </p>
+      <h2>Principe de fonctionnement</h2>
+      <p>
+        Comme dit précédemment, l'automaton est une grille constituée de
+        cellules. Chacune d'entre-elles possède un état correspondant à une
+        valeur décimale entre 0 et 1. Un filtre est appliqué à chacune d'entrer
+        elle lorsque l'on avance la simulation. <br />
+        Ce filtre est, en mathématiques, appelé masque de convolution.
+        C’est-à-dire une matrice contenant des poids. En centrant celle-ci sur
+        la cellule dont on cherche à calculer l'état, on somme les valeurs des
+        voisines multipliées par le poids correspondant dans le masque. <br />
+        La valeur est alors passé dans une fonction d'activation. En effet, si
+        la réponse de la convolution était linéaire, on tendrait très rapidement
+        vers un système stable.
+      </p>
+      <h2>Application au Conway's Game Of Life</h2>
+      <p>Les règles appliquées aux cellules sont les suivantes:</p>
+      <br />
+      <ul>
+        <li>
+          Si la cellule est vivante et a 2 ou 3 voisines vivantes, elle reste en
+          vie.
+        </li>
+        <li>
+          Si la cellule est morte, elle deviens vivante si elle possède
+          uniquement 3 voisines vivante.
+        </li>
+        <li>Sinon elle meurt.</li>
+      </ul>
+      <br />
+      <p>
+        On associe ici mort à l'état 0 et vivant a l'état 1. Cet exemple ne
+        contient pas de valeur décimale de par sa nature. Essayons alors de
+        traduire ces règles par un filtre et une fonction. On doit compter le
+        nombre de cellules voisines étants en vie. On prend une matrice 3x3 et
+        prenons les éléments de contour égal à 1. En revanche, quelle valeur
+        donnée a la cellule du milieu. Sachant que le maximum de voisines
+        vivantes donnera une valeur de 9, il nous faut lui donner une valeur
+        supérieure qui n'entrera pas en conflit avec la règle de survie. On lui
+        attribue alors un poids de 9. Le filtre final peut alors être exprimé de
+        la façon suivante :
+      </p>
+      <code>
+        [1, 1, 1], <br />
+        [1, 9, 1], <br />
+        [1, 1, 1] <br />
+      </code>
+      <p>
+        Pour la fonction d'activation, il nous faut étudier les sorties
+        possibles après la convolution. Dans le cas où la cellule serait morte,
+        il nous faut uniquement 3 voisines vivantes pour qu'elle revive. En
+        revanche, si elle est vivante et à 2 ou 3 voisines, elle reste en vie.
+      </p>
+      <code>
+        if x == 3. or x == 11. or x == 12. : <br />
+        &emsp;return 1 <br />
+        else: <br />
+        &emsp;return 0
+      </code>
+      <p>
+        Le snippet ci-dessus nous permet de définir l'état de la cellule a
+        l'aide du filtre que l'on a établis. Ce set de règles, bien que très
+        simple, permet l'apparition de comportement complexe. Le Game Of Life
+        peut-être considéré comme un langage de programmation. Il est d'ailleurs
+        considéré comme Turing-Complete. C'est-à-dire capable de se simuler
+        lui-même. <br />
+        Un exemple en vidéo :
+      </p>
+      <br />
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/xP5-iIeKXE8"
+        title="YouTube video player"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+      <br />
+      <h2>Création d'une sandbox de simulation</h2>
+      <p>
+        Une simulation de cette envergure requiert beaucoup d'opérations
+        réalisables en parallèle (calcul des états de chaque cellule). Pour ce
+        faire, on se tourne vers la parallélisation des opérations sur le GPU.
+        Ma configuration étant une carte NVIDIA GTX1070 en configuration max-q
+        (architecture cuda), j'ai besoin du
+        <a href="https://developer.nvidia.com/cuda-downloads">toolkit GPU</a>
+        correspondant. Il est utilisé par la librairie numba pour paralléliser
+        certaines fonctions.
+      </p>
+      <h3>Définition de la fonction d'activation</h3>
+      <p>
+        La fonction d'activation changera suivant le modèle que l'on utilise. On
+        en définit donc la structure générale.
+        <br />
+        Par chance, on ne fait aucun calcul particulier nécessitant des
+        fonctions spéciale de python. Le module cuda de numba supporte le python
+        vanilla, il suffit alors d'indiquer au compilateur (ici, on utilise le
+        jit cuda ), que la fonction d'activation seras utilisé sur le GPU a
+        l'aide du décorateur @cuda.jit. <br />
+        En prenant pour exemple la fonction d'activation du Game Of Life, on
+        obtient le snippet suivant :
+      </p>
+      <code>
+        @cuda.jit <br />
+        def ActFunction(x): <br />
+        &emsp;if x == 3. or x == 11. or x == 12. : <br />
+        &emsp; &emsp;return 1 <br />
+        &emsp; else: <br />
+        &emsp; &emsp;return 0 <br />
+      </code>
+      <h3>Définition du filtre</h3>
+      <p>
+        Par soucis de simplicité, on ne s'intéresse dans ce projet qu'aux
+        filtres de Moore 3x3. D'autres types existes, notamment ceux de Von
+        Neumann, ils sont en revanche exprimables a l'aide de filtre de Moore
+        bien ordonnée. On ignore aussi les n-états précédents, qui
+        nécessiteraient leur stockage en RAM. Ces deux facettes sont cependant
+        faciles a implémenter et ne nécessitent que des modifications
+        mineures.<br />
+        On implémente ici les matrices a l'aide de numpy. En prenant le filtre
+        du Game Of Life comme exemple :
+      </p>
+      <code>
+        NCA_Filter = np.array([ <br />
+        &emsp; [1, 1, 1 ], <br />
+        &emsp; [1, 9, 1 ], <br />
+        &emsp; [1, 1, 1 ]]) <br />
+      </code>
+      <p>
+        NCA correspond à Neural Cellular Automaton. En effet, les automates
+        cellulaires sont un type de réseau neuronal. <br />
+        On peut facilement construire des aléatoires en important les fonctions
+        random de python.
+      </p>
+      <h3>Fonction de calcul des états</h3>
+      <p>
+        Notre filtre et notre fonction d'activation maintenant définis, il nous
+        faut les combiner. La fonction de calcul des états tournant sur le GPU,
+        il nous faut l'indiquer au JIT cuda a l'aide du décorator @cuda.jit.
+        <br />
+        Afin de pouvoir call une fonction GPU, il nous faut définir les blocs
+        GPU que nous allon utiliser. L'image étant 2D, on définit un array 2D
+        dépendant de la résolution de notre image final, ainsi que les threads
+        par bloc.
+      </p>
+      <code>
+        _SIZE = (1080, 1920) <br />
+        _BLOCKSPERGRID = (_SIZE[0] + (36 - 1) , _SIZE[1] + (36 - 1)) <br />
+        _THREADSPERBLOCK = (6,6)
+      </code>
+      <p>
+        Afin de ne pas sortir d'erreur IndexError, il nous faut définir les
+        conditions de bord. Ici, nous allons wrap l'espace, c'est-a-dire aller
+        au début ou partir à la fin lorsque l'on cherche à obtenir la valeur
+        d'une cellule en dehors de notre espace. D'autres méthodes comme définir
+        une valeur au bord existe, mais ne serais pas judicieuse pour une
+        sandbox comme celle-ci. On pose donc la position du pixel recherché
+        comme la somme de la coordonnée de la cellule et de l'offset, modulo la
+        taille de l'image. <br />
+        Pour respecter les conditions sur les états, ont clamp la valeur entre 0
+        et 1. La fonction GPU obtenue est alors celle-ci :
+      </p>
+      <code>
+        @cuda.jit <br />
+        def GPU_PIXEL(_input, _filter, _output):<br />
+        &emsp; x,y = cuda.grid(2)<br />
+        &emsp; sum = 0.<br />
+        &emsp; xSize = _input.shape[0]<br />
+        &emsp; ySize = _input.shape[1]<br />
+        &emsp; if x <= xSize and y <= ySize:<br />
+        &emsp; &emsp; for subx in [-1,0,1]:<br />
+        &emsp; &emsp; &emsp; for suby in [-1,0,1]:<br />
+        &emsp; &emsp; &emsp; &emsp; sum +=
+        _input[(subx+x)%(xSize-1),(suby+y)%(ySize-1)] *
+        _filter[subx+1,suby+1]<br />
+        &emsp; sum = ActFunction(sum)<br />
+        &emsp; if sum <0:<br />
+        &emsp; &emsp; sum = 0<br />
+        &emsp; elif sum > 1:<br />
+        &emsp; &emsp; sum = 1<br />
+        &emsp; _output[x,y] = sum<br />
+      </code>
+      <p>
+        Pour augmenter la taille des filtres utilisable, il suffit de remplacer
+        les listes d'offset par les listes corespondantes dans les deux boucles
+        for. Il est possible de les rendre dynamiques.
+      </p>
+      <h2>Simulation</h2>
+      <p>
+        La simulation permet de mettre en relation l'état du système à une étape
+        n à son état à une étape n+1 par application de la convolution du
+        filtre.
+      </p>
+      <h3>Initialisation de l'automate</h3>
+
+      <p>
+        Afin de pouvoir utiliser les outils définis dans les parties
+        précédentes, il est nécessaire de créer notre espace de travail.
+        Plusieurs solutions s'offrent à nous. <br />
+        La première consiste à créer un espace dont chaque valeur est aléatoire
+        entre 0 et 1. <br />
+        La seconde choisis une valeur aléatoire 0 ou 1 pour chaque cellule.
+        <br />
+      </p>
+      <code>
+        frame = np.random.rand(size[0], size[1]) <br />
+        frame = np.random.randint(2,size=(size[0], size[1]))
+      </code>
+      <p>
+        Le snippet ci-dessus utilise la librairie numpy pour générer un array de
+        deux façons différentes. La première génère une matrice bidimensionnel
+        composé de valeurs comprises entre 0 et 1, tandis que le deuxième ne
+        contient uniquement que des 0 ou des 1. size correspond à la taille de
+        l'image souhaitée. <br />
+        On créé aussi un second array populé de 0 et de même dimension, qui
+        recevra l'étape n+1 de la simulation.
+      </p>
+      <code>output = np.zeros((xSize, ySize))</code>
+
+      <h3>Buffer</h3>
+      <p>
+        Le buffer est l'espace mémoire permettant au CPU et GPU d'échanger des
+        informations. Ici, on l'utilisera pour passer nos arrays a chaque
+        étapes. cuda nous fournit une fonction permettant de populer le buffer
+        simplement avec cuda.to_device(object). On l'utilise pour passer notre
+        filtre, notre array de départ (input) et notre array de fin (output).
+      </p>
+      <code>
+        GPUInputArray = cuda.to_device(input) <br />
+        GPUOutputArray = cuda.to_device(output) <br />
+        GPUFilterArray = cuda.to_device(filter) <br />
+      </code>
+
+      <h3>Fonction de simulation n+1</h3>
+      <p>
+        La fonction de simulation n+1 permet de passer d'un état à l'état
+        suivant. <br />
+        Dans un premier temps, on créé l'array d'output qui recevras le nouvel
+        état simulé. On passe ensuite nos données dans le buffer GPU a l'aide
+        des fonctions vu précédemment. On appelle alors la fonction de calcul en
+        parallèle sur le GPU pour calculer les valeurs de chaque pixel. On
+        retourne enfin la grille d'output, populé ave l'état n+1.
+      </p>
+      <code>
+        def NextStep(input, filter, activFunction): <br />
+        &emsp; """takes np array shape = (x, y) (dim 2) and returns next step of
+        the sim""" <br />
+        &emsp; xSize = input.shape[0] <br />
+        &emsp; ySize = input.shape[1] <br />
+        &emsp; output = np.zeros((xSize, ySize)) <br />
+        &emsp; threadsperblock = _THREADSPERBLOCK <br />
+        &emsp; blockspergrid = _BLOCKSPERGRID <br />
+        &emsp; GPUInputArray = cuda.to_device(input) <br />
+        &emsp; GPUOutputArray = cuda.to_device(output) <br />
+        &emsp; GPUFilterArray = cuda.to_device(filter) <br />
+        &emsp; GPU_PIXEL[blockspergrid, threadsperblock](input, filter, output)
+        <br />
+        &emsp; return output <br />
+      </code>
+      <h3>Boucle de simulation finale</h3>
+      <p>
+        Nous possédons enfin tous les éléments nécessaires à la réalisation
+        d'une boucle de simulation complète. On se permet d'importer la
+        librairie OpenCV afin d'afficher les images générées. <br />
+        La boucle en elle-même ne fait qu'intervertir l'array renvoyer par la
+        fonction de simulation avec l'array actuel. En revanche, on peut
+        utiliser cette boucle afin d'afficher les images simulées et construire
+        un rendu graphique. On pourrait tout aussi bien introduire des mesures
+        sur les arrays pour en sortir des indices pouvant par exemple
+        représenter la valeur moyenne des cellules, ou encore sa stabilité.
+      </p>
+      <code>
+        for i in range(_STEPS): <br />
+        &emsp; frame = NextStep(frame, NCA_Filter, ActFunction) <br />
+        &emsp; if _SKIPONEFRAME: frame = NextStep(frame, NCA_Filter,
+        ActFunction) <br />
+        &emsp; if _SKIPTWOFRAME: frame = NextStep(frame, NCA_Filter,
+        ActFunction) <br />
+        &emsp; cv2.imshow('image', frame) <br />
+      </code>
+      <p>
+        cv2.imshow() nous permet d'afficher une fenetre avec l'image simulé.
+        <br />
+        On voit l'apparition de deux variables : _SKIPONEFRAME et _SKIPTWOFRAME.
+        Certaines simulations possèdent des inversions de contraste sur 2 ou 3
+        simulations. Ces paramètres permettent de les exclues du rendu.
+      </p>
+      <h2>Résultat</h2>
+      <p>
+        Le programme construit ci-dessus permet de simuler différentes
+        configurations. Si en l'état actuel il ne supporte que des filtres 3x3,
+        il peut facilement être modifié afin d'accommoder tout type de filtre.
+      </p>
+      <p>
+        La parallélisation du calcul de chaque cellule permet des performances
+        optimales lors de simulation de grands automates.
+      </p>
+      <h3>Quelques automates remarquables</h3>
+      <p>
+        Plusieurs tests ont été réalisés sur cette implémentation. On a appliqué
+        des situations de départ ainsi que des filtres aléatoire à des fonctions
+        d'activation définis. Après avoir testé une centaine de configuration
+        différentes, certaines se sont révélé assez intéressantes.
+      </p>
+      <h4>Cas 1</h4>
+      <iframe
+        src="https://www.youtube.com/embed/eqa5wLilHm0"
+        title="YouTube video player"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+      <iframe
+        src="https://www.youtube.com/embed/mm-cagZolS4"
+        title="YouTube video player"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+      <code>
+        filter : [[-0.99038735 0.82367216 -0.99038735] <br />
+        [ 0.82367216 0.31695098 0.82367216] <br />
+        [-0.99038735 0.82367216 -0.99038735]] <br />
+        <br />
+        activation function : -1./pow(2., (0.6*pow(x, 2.)))+1.
+      </code>
+      <p>
+        Cette configuration fait apparaître des "blobs". On pourrait facilement
+        comparer l'évolution du système a la croissance de colonies de bactéries
+        en boite de Pétri. On observe aussi l'apparition d'une structure
+        complexe stable à l'intérieur des blobs.
+      </p>
+      <h4>Cas 2</h4>
+      <iframe
+        src="https://www.youtube.com/embed/-pei8g-5-to"
+        title="YouTube video player"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+      <code>
+        filter : [[ 0.47997602 -0.95063218 -0.58020229] <br />
+        [ 0.45203884 0.71100214 0.20405495] <br />
+        [ 0.11356646 0.30465583 -0.06807459]] <br />
+        <br />
+        Activation function : x*x <br />
+      </code>
+      <iframe
+        src="https://www.youtube.com/embed/YUT5pm3nwEE"
+        title="YouTube video player"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+      <code>
+        filter : [[ 0.42132001 0.66150356 0.51887038] <br />
+        [-0.43701987 0.91708626 -0.51600505] <br />
+        [-0.29352382 -0.18780905 -0.67019028]] <br />
+        <br />
+        Activation function : x*x <br />
+      </code>
+      <p>
+        Contrairement au cas 1, on a ici l'apparition de motifs semi-stable se
+        déplaçant. Il semble y avoir un axe de propagation privilégié par le
+        filtre, en particulier par les signes. Une façon possible de modifier
+        l'axe privilégié serait d'être de multiplier le filtre par une matrice
+        de rotation. Hypothèse a étudié.
+      </p>
+      <h4>Cas 3</h4>
+      <iframe
+        src="https://www.youtube.com/embed/ODRBdWZeeWc"
+        title="YouTube video player"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+      <code>
+        filter : [[-0.65554923 -0.26403847 -0.93430421] <br />
+        [ 0.36676547 -0.56380362 0.08235751] <br />
+        [ 0.32941183 0.82646549 -0.90875365]] <br />
+        <br />
+        activation function : x*x <br />
+      </code>
+      <p>
+        Ici, le système semble tendre vers une configuration stable.
+        L'apparition de zones semi-stable créée des sortes de veines semblable a
+        du marbre.
+      </p>
+      <h4>Cas 4</h4>
+      <iframe
+        src="https://www.youtube.com/embed/K1cTvlyYddA"
+        title="YouTube video player"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+      <code>
+        filter : [[-0.22679137 -0.21108546 -0.54274893] <br />
+        [ 0.82145109 0.41096424 0.01883179] <br />
+        [-0.54794955 -0.28015209 -0.17391146]] <br />
+        <br />
+        activation function : x*x <br />
+      </code>
+      <p>
+        Cette configuration semble tendre vers l'annulation de toutes les
+        cellules. Bien que des "îles" apparaissent, elles ont tendance à
+        facilement disparaître en décroissant. Par extrapolation, continuer la
+        simulation finirait par annuler toute la matrice.
+      </p>
+      <h4>Cas 5</h4>
+      <iframe
+        src="https://www.youtube.com/embed/CSsku42aNYM"
+        title="YouTube video player"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+      <code>
+        filter used : <br />
+        NCA_Filter = np.array([ [0.565 , -0.716 , 0.565 ], <br />
+        [-0.716 , 0.627 , -0.716 ], <br />
+        [0.565, -0.716 , 0.565 ]]) <br />
+        <br />
+        activation function: <br />
+        def ActFunction(x): <br />
+        return abs(1.2*x) <br />
+      </code>
+      <p>
+        Un exemple pris sur
+        <a href=" https://neuralpatterns.io/ ">neuralpatterns.io</a>. On voit
+        apparaître à droite et à gauche des artéfacts. Le bug est discuté dans
+        la section suivante relevant des bugs potentiels.
+      </p>
+      <h4>Cas 6</h4>
+      <iframe
+        src="https://www.youtube.com/embed/urziooK-DjM"
+        title="YouTube video player"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+      <code>
+        filter : [[-0.8300993 -0.44785473 0.979766 ] <br />
+        [-0.47983372 0.07656833 -0.35514032] <br />
+        [ 0.53823346 0.43503127 0.2492277 ]] <br />
+        <br />
+        Activation function : x*x <br />
+      </code>
+      <p>
+        Mon favoris de toutes les configurations présentées ici. Ce cas présente
+        plusieurs particularités intéressantes à étudier.
+      </p>
+      <br />
+      <p>
+        Les motifs liés à ce filtre sont semi-stables et évolutifs. Une étude
+        plus rapprochée sur un motif en particulier révèle que la structure
+        interne est stable. En revanche, les bords sont constitués d'un motif
+        permettant au motif de s'allonger en se translatant sur le côté et en
+        créant les motifs stable internes.
+      </p>
+      <br />
+      <p>
+        Le motif semble présenter une capacité "d'auto réparation". En effet,
+        lorsque l'un d'entre eux entre en collision avec un deuxième motif, il
+        se stabilise et continu son parcours en reprenant sa croissance. En
+        revanche, une pertubation/collision bien placée déstabiliseras le motif
+        d'une façon dont il ne pourra pas récupérer. Le temps de désintégration
+        semble en revanche très variable.
+      </p>
+      <p>
+        Enfin, le résidu laisser derrière par le motif engendre parfois la
+        création d'un nouveau motif se propageant dans le sens inverse a celui
+        d'origine.
+      </p>
+      <h2>Capacités, limitations, bugs</h2>
+      <h3>Capacités</h3>
+      <p>
+        Il semblerait que le modèle construit ici soit assez versatile et
+        pourrait facilement supporter tout type de filtre, moyennant une
+        modification minime à la fonction de calcul d'état. Les arrays de sortie
+        étant des array numpy, ils peuvent être directement utilisé pour du
+        calcul scientifique.
+      </p>
+      <h3>Limitations</h3>
+      <p>
+        Ce type de sandbox de simulation étant assez basique, la seule
+        limitation réelle est matérielle. Bien que la vitesse du GPU est à
+        prendre en compte, le principale bottleneck seras au niveau du CPU. La
+        vitesse de calcul séquentielle est donc plus importante que la vitesse
+        de calcul parallèle. Cela est en revanche faux pour les cas ou la taille de
+        la matrice à simuler est très grande devant le nombre de cœur GPU
+        pouvant être mis à disposition.
+      </p>
+      <h3>Bugs</h3>
+      <p>
+        Plusieurs passe et plusieurs tests ont déjà éliminé une grande partie
+        des bugs. Il subsiste en revanche une anomalie facilement visible dans
+        le cas 5. Les bords droits et gauches ne sont pas noirs comme ils le
+        devraient. Je n'ai malheureusement pas réussi à débugger ce phénomène
+        depuis mon code, j'émet en revanche l'hypothèse qu'il y a un problème
+        dans la façon dont cuda gère les indices négatifs dans les array numpy.
+      </p>
+      <h2>Conclusion</h2>
+      <p>
+        Ce projet permet de se familiariser succinctement avec la programmation
+        en parallèle et le traitement d'image. Mettre à profit les capacités des
+        GPUs est nécessaire pour optimiser les temps de calcul et donc la durée
+        de certaines opérations. <br />
+        <br />
+      </p>
+      <h2>Bonus</h2>
+      <p>
+        Le repo github est accessible
+        <a
+          href="https://github.com/lele394/Cellular-Automata/blob/main/CellularAutomaton.py"
+        >
+          ici</a
+        >
+        <br />
+        dépendances : cmath, numpy, numba, pillow (PIL), cv2
+        <br />
+        En revanche, il contient des paramètres supplémentaire tel que la
+        capacité à créer des vidéos (déconseillé avec l'implémentation
+        actuelle). Programme à utiliser a vos propres risques, il modifie la
+        variable d'environnement CUDA_HOME. <br />
+        Le projet contient plusieurs fonctions d'activation et de filtres
+        différents, certain présenté plus haut dans cet article. <br />
+        Le fichier main.py est constitué d'un module de stream Twitch, ne
+        l'utilisez que si vous savez ce que vous faites. <br />
+        En cas de questions, n'hésitez pas à me contacter.
+      </p>
+    </div>
+
+    <footer>
+      <ul class="site-map" aria-label="Sections">
+        <li>
+          <a href="/public/alpha/alpha.html#Presentation">Présentation</a>
+        </li>
+        <li><a href="/public/alpha/alpha.html#Projets">Projets</a></li>
+        <li><a href="/public/alpha/alpha.html#Parcours">Parcours</a></li>
+        <li>
+          <a href="/public/alpha/alpha.html#Photographie">Photographie</a>
+        </li>
+        <li><a href="/public/alpha/alpha.html#Contact">Contact</a></li>
+      </ul>
+
+      <ul class="contact" aria-label="Contact">
+        <li>tél : 07.81.25.10.39</li>
+        <li>mail : lele.bechet@gmail.com</li>
+        <li>instagram : @nebulae_wanderer</li>
+        <li>Github : lele394</li>
+      </ul>
+
+      <img src="../img/NW-logo.jpg" class="logo" />
+    </footer>
+  </body>
+</html>

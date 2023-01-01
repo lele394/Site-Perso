@@ -1,0 +1,168 @@
+* {
+    padding:0;
+    margin:0;
+}
+
+
+
+body {
+    background-color: rgb(20, 43, 77);
+}
+
+
+
+
+
+
+
+.container{
+    height:100vh;
+    width:100vw;
+    display: grid;
+    place-items: center;
+
+}
+
+
+.calculator{
+    display: grid;
+    place-items: center;
+    position: relative;
+    /*border: 3px solid rgb(59, 122, 216);*/
+    background-image: linear-gradient(to top left, rgb(26, 75, 148) , rgb(57, 127, 231));
+    padding: 3vh;
+    border-radius: 3vh;
+    box-shadow: 12px 12px rgb(7, 38, 73);
+
+}
+
+
+.displayC{
+    font: Arial;
+    -top: 3vh;
+    font-size: 30px;
+    text-align: right;
+    color:white;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    bottom:50px;
+}
+.result{
+    font: Arial;
+    margin-top: 30px;
+    -top: 3vh;
+    font-size: 30px;
+    text-align: right;
+    color:rgb(98, 119, 151);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    bottom:50px;
+}
+
+
+
+
+
+
+#display::-webkit-scrollbar {
+    display: block;
+    height: 3px;
+}
+
+.display-screen{
+    padding: 3vh 3vh 3vh 3vh;
+    min-width: 80%;
+    width: auto;
+    height: 12vh;
+    /*background-color: rgb(43, 43, 43);*/
+    background-image: linear-gradient(to top left, rgb(37, 37, 37) , rgb(70,70,70));
+    box-shadow: 8px 8px rgb(16, 87, 168);
+    z-index: 1;
+    margin-bottom: 3vh;
+    border-radius: 2vh;
+}
+
+
+
+
+
+
+
+
+button{
+    font: 150% Arial;
+    color: white;
+    transition: all 200ms ease;
+    text-align: center;
+
+}
+
+button:hover{
+    transform: scale(1.12);
+    background-color: rgb(140, 180, 255);
+}
+button:active{
+    transform: scale(1.12);
+    background-color: rgb(130, 160, 214);
+}
+
+
+
+.button-operator {
+    margin: 4px;
+    width: 6vh;
+    height: 6vh;
+    background-color: rgb(102, 149, 238);
+    border: 0px;
+    border-radius: 50%;
+    box-shadow:  4px 4px rgb(31, 52, 112);
+
+}
+
+
+.button-operator#clear {
+    background-color: rgb(238, 102, 147);
+    box-shadow:  4px 4px rgb(98, 31, 112);
+}
+.button-operator#clear:hover{
+    transform: scale(1.12);
+    background-color: rgb(255, 140, 174);
+}
+.button-operator#clear:active{
+    transform: scale(1.12);
+    background-color: rgb(216, 125, 147);
+}
+
+
+.button-operator#egal {
+    background-color: rgb(102, 238, 163);
+    box-shadow:  4px 4px rgb(31, 112, 88);
+}
+.button-operator#egal:hover{
+    transform: scale(1.12);
+    background-color: rgb(166, 248, 193);
+}
+.button-operator#egal:active{
+    transform: scale(1.12);
+    background-color: rgb(125, 216, 174);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**/

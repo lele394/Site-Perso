@@ -1,0 +1,712 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  border: none;
+}
+
+body {
+  font-family: Arial, sans-serif;
+
+  font: 0px;
+  border: none;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+}
+
+#LandingSection {
+  overflow: hidden;
+  scroll-snap-align: start;
+  position: relative;
+  background: #0c222f;
+  height: 100vh;
+}
+
+#star {
+  background-image: url("../img/star.png");
+  position: fixed;
+  margin-left: auto;
+  margin-right: auto;
+
+  width: 20vw;
+  height: 20vh;
+  bottom: 60%;
+  left: 40vw;
+
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.ground {
+  overflow: hidden;
+  position: absolute;
+  bottom: 0px;
+  height: 10vh;
+  width: 100vw;
+  border-width: 0;
+  border-radius: 50% 50% 47% 53% / 100% 100% 0% 0%;
+  background: #f89827;
+}
+
+#shuttle {
+  position: fixed;
+  margin-left: auto;
+  margin-right: auto;
+
+  width: 20vw;
+  height: 20vh;
+  bottom: 0vh;
+  left: 40vw;
+
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  background-image: url('data:image/svg+xml,%3C%3Fxml version="1.0" encoding="UTF-8" standalone="no"%3F%3E%3C!-- Created with Inkscape (http://www.inkscape.org/) --%3E%3Csvg width="152.84447mm" height="236.86047mm" viewBox="0 0 152.84447 236.86047" version="1.1" id="svg5" xml:space="preserve" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"%3E%3Csodipodi:namedview id="namedview7" pagecolor="%23ffffff" bordercolor="%23000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="%23d1d1d1" inkscape:document-units="mm" showgrid="false" /%3E%3Cdefs id="defs2" /%3E%3Cg inkscape:label="Calque 1" inkscape:groupmode="layer" id="layer1" transform="translate(-1.0681068,-1.0032812)"%3E%3Cimage width="154.25209" height="237.59584" preserveAspectRatio="none" id="image17" x="0.58363461" y="0.78272319" /%3E%3Cpath style="opacity:1;fill:%23ffffff;stroke-width:0.264583" d="m 51.185407,202.23254 c -0.185943,-17.42781 3.730066,-23.78285 6.899992,-32.74361 0.232056,-0.65598 0.125455,-108.267171 0.125455,-108.267171 0,0 -8.193146,46.498181 -8.279993,47.547231 -1.972269,23.82365 -20.307223,31.34889 -43.156322,57.45813 -3.2116677,3.66991 -5.1074429,8.68976 -5.5199947,13.54907 -0.41948427,4.94096 0,12.41999 0,12.41999 0,0 49.9393017,10.82732 49.9308627,10.03636 z" id="path233" sodipodi:nodetypes="sscssscs" /%3E%3Cpath style="opacity:1;fill:%23ffffff;stroke-width:0.264583" d="m 103.79527,202.21188 c 0.18594,-17.42781 -3.73007,-23.78285 -6.899992,-32.74361 -0.232056,-0.65598 -0.125455,-108.267169 -0.125455,-108.267169 0,0 8.193147,46.498179 8.279987,47.547229 1.97227,23.82365 20.30723,31.34889 43.15632,57.45813 3.21167,3.66991 5.10745,8.68976 5.52,13.54907 0.41948,4.94096 0,12.41999 0,12.41999 0,0 -49.9393,10.82732 -49.93086,10.03636 z" id="path233-3" sodipodi:nodetypes="sscssscs" /%3E%3Cpath style="opacity:1;fill:%23ffffff;stroke-width:0.264583" d="M 77.907199,1.0036354 C 65.880136,0.85201436 60.343578,49.429045 60.343578,49.429045 c 0,0 0.831685,120.902395 -0.250907,121.439885 -6.691767,3.32239 -6.460203,30.09324 -6.649085,42.52905 -0.0087,0.576 7.276357,-0.12545 7.276357,-0.12545 0,0 -2.085293,5.57378 -0.501817,7.52726 2.979221,3.67537 14.050896,2.00727 14.050896,2.00727 0,0 0.752727,15.26464 3.261815,15.05453 2.759997,0.16625 3.512722,-15.05453 3.512722,-15.05453 0,0 10.900439,2.02655 13.674535,-1.6309 0.902876,-1.19038 0.250907,-7.90363 0.250907,-7.90363 0,0 6.896159,0.61488 6.899999,0 0.1274,-20.40601 -0.24422,-38.6239 -7.150906,-43.28178 -0.959635,-0.64718 0,-122.192613 0,-122.192613 0,0 -5.255038,-46.6488209 -16.810895,-46.7945016 z" id="path461" sodipodi:nodetypes="scsscscccscsscs" inkscape:export-filename="path461.svg" inkscape:export-xdpi="96" inkscape:export-ydpi="96" /%3E%3C/g%3E%3C/svg%3E%0A');
+}
+
+
+
+section {
+  scroll-snap-align: start;
+  border: none;
+  color: white;
+}
+
+.sectionContainer {
+  scroll-snap-type: y proximity;
+}
+
+.spacer1 {
+  aspect-ratio: 1920/300;
+  width: 110%;
+  height: 100%;
+}
+
+.spacers {
+  background-color: #0c222f;
+  right: -20px;
+  margin: 0 0 0 0;
+  overflow: hidden;
+  align-items: center;
+  border-right: 0;
+}
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=====PRESENTATION======
+
+*/
+.PresentationSection {
+  background: #0c222f;
+}
+
+.PresentationSection > .Container {
+  border-radius: 40px;
+  margin: 0 12% 0 12%;
+  display: flex;
+  flex-wrap: wrap;
+  color: #b5d4e2;
+  background-color: #ffffff00;
+}
+.Selfie {
+  margin: 5% 0% 5% 5%;
+  height: 20vh;
+  width: auto;
+  border-radius: 2vh;
+}
+
+.presentationTextContainer {
+  background-color: #0c364b;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  padding-right: 6%;
+  padding-bottom: 6%;
+  margin-left: 2%;
+  border-radius: 10px;
+}
+
+.presentationTitle {
+  font-size: 3vmax;
+  margin-top: 5%;
+  margin-bottom: 3%;
+  margin-left: 7%;
+}
+
+.presentationSpacer {
+  height: 7px;
+  background-color: #45617275;
+  border-radius: 3.5px;
+  margin-left: 10%;
+  margin-right: 20%;
+}
+
+.presentationText {
+  font-size: 2vmax;
+  text-align: justify;
+  margin-top: 3%;
+  margin-left: 12%;
+}
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=====PROJETS======
+
+*/
+.spacerPresProj {
+  /*add svg*/
+  aspect-ratio: 1920/300;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url("../img/spacerPresProj.svg");
+}
+
+.ProjectSection {
+  background-color: #f89827;
+}
+
+.ProjectContainer {
+  padding-top: 8vh;
+  padding-bottom: 5vh;
+}
+.ProjectTitle {
+  margin-left: 15%;
+  font-size: 3vmax;
+}
+
+.ProjectCardsContainer {
+  gap: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 2vh 2vw 2vh 2vw;
+  background-color: #ffd0aa;
+  box-shadow: 1vh 0px 12px 12px #ffd0aa;
+  margin-top: 2vh;
+}
+
+
+
+/* OLD CARDS
+.Card {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  transition: all 200ms ease;
+  box-shadow: 12px 12px #0c364b88;
+  border-radius: 25px;
+  aspect-ratio: 2/3;
+  margin-top: 5vw;
+  margin-right: 3vw;
+  margin-bottom: 5vw;
+  margin-left: 3vw;
+  width: 300px;
+  height: 450px;
+  background-color: #0c364b;
+}
+.Card:hover {
+  transform: scale(1.12);
+  background-color: #0f435e;
+}
+
+.CardImage {
+  margin: 20px;
+  margin-bottom: 0;
+  border-radius: 2vh;
+  height: 30%;
+  width: 80%;
+}
+
+.CardTitle {
+  font-weight: bold;
+  color: white;
+  margin: 20px;
+  margin-bottom: 0;
+}
+
+.CardText {
+  text-align: justify;
+  margin: 20px;
+  color: white;
+}
+
+.CardButton {
+  transition: all 200ms ease;
+  color: #ffffff;
+  text-decoration: none;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 8px;
+  border: 2px solid #ffffff;
+}
+.CardButton:hover {
+  transform: scale(1.12);
+  border: 1px solid #94c2ec;
+}
+*/
+
+.project-card{
+  --card-min-width: 230px;
+  --card-max-width: 230px;
+  --card-border-color: rgba(255, 255, 255, 0.418);
+  --description-color: #0c222f;
+  overflow: hidden;
+  border: 2px solid var(--card-border-color);
+  border-radius: 20px;
+  min-width: var(--card-min-width);
+  max-width: var(--card-max-width);
+  aspect-ratio: 1/1.6;
+  background: var(--image-link);
+  background-size: cover;
+  transition: all 300ms cubic-bezier(0, 1.71, 0.88, 0.89);
+
+}
+
+.card-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+/*  background: linear-gradient(0deg, 
+                                rgba(12,34,47,1) 12%, 
+                                rgba(12,34,47,0.8) 56%, 
+                                rgba(12,34,47,0) 100%);*/
+  
+}
+
+
+
+.description-container > p {
+  font-size: 1.3ch;
+  margin: 3%;
+  color: white;
+  font-family: sans-serif;
+}
+
+.card-content > h1 {
+  box-shadow: 0px 0px 20px 20px var(--description-color);
+
+  font-size: 2ch;
+  padding-bottom: 5%;
+  padding: 3%;
+  color: white;
+  font-family: sans-serif;
+  background-color: var(--description-color);
+}
+
+.description-container > a { /* da button*/
+  color: #ffffff;
+  text-decoration: none;  
+  margin: 10% auto 10% auto;
+  border-radius: 3px;
+  border: 2px solid white;
+  padding: 8px;
+  transition: all 200ms ease;
+}
+
+.description-container {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height:0;
+  transition: height 300ms cubic-bezier(0, 1.71, 0.88, 0.89);
+  background-color: var(--description-color);
+ /* background: linear-gradient(0deg, 
+  rgba(12,34,47,1) 12%, 
+  rgba(12,34,47,0.8) 56%, 
+  rgba(12,34,47,0) 100%);*/
+}
+
+.project-card:hover .description-container{
+  height: 50%;
+}
+
+.project-card:hover {
+  transform: scale(1.04);
+}
+
+.description-container > a:hover {
+  transform: scale(1.12);
+  border: 1px solid #94c2ec;
+}
+
+
+
+
+
+
+
+
+.spacerProjParcours {
+  /*add svg*/
+  aspect-ratio: 1920/300;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url("../img/spacerProjParcours.svg");
+}
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=====PARCOURS======
+
+*/
+.ParcourSection {
+  background-color: #0c222f;
+}
+
+.ParcoursTitle {
+  margin-left: 15%;
+  font-size: 3vmax;
+}
+
+.ParcoursContainer {
+  display: flex;
+
+  flex-direction: column;
+
+  padding-top: 10vh;
+  padding-bottom: 20vh;
+}
+
+.ParcoursElementContainer {
+  display: flex;
+  flex-direction: row; 
+  padding-left: 20vw;
+  padding-right: 15vw;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.ParcoursElementDate {
+  font-weight: bold;
+
+  display: flex;
+  justify-content: center;
+  border-radius: 20px;
+  /*border-radius: 55% 45% 55% 45% / 100% 0% 100% 0%;*/
+  padding: 10px 20px 10px 20px;
+  border: #f89827 solid 2px;
+  background-color: #ffd0aa;
+  color: #0c364b;
+  flex-direction: column;
+}
+
+
+
+.ParcoursElementTitle {
+  font-weight: bold;
+  width:100%;
+  margin-left: 13px;
+  margin-right: 13px;
+  border-radius: 20px ;
+  background-color: #ffd0aa;
+  color: #0c364b;
+  padding: 10px 20px 10px 20px ;
+}
+
+
+
+.spacerParcoursInsta{
+  aspect-ratio: 1920/300;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url("../img/spacerParcoursInsta.svg");
+}
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=====INSTA-PHOTO======
+
+*/
+
+
+
+
+.InstaSection{
+  background-color: #f89827;
+}
+
+
+.InstaTitle {
+  margin-left: 15%;
+  font-size: 3vmax;
+}
+
+.InstaCarousel {
+  position: relative;
+}
+
+.InstaCarouselContainer {
+  --card-margin : 20px;
+  --card-padding : 0;
+  --card-width: 328px;
+  --card-height: auto;
+  --watermakr-size: 20%;
+  scroll-behavior: smooth;
+  overflow-x: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  transition: all 0.6s ease;
+}
+
+
+.InstaCarouselContainer > .InstaCard {
+  display: flex;
+  padding-left: var(--card-padding);
+  padding-right: var(--card-padding);
+  margin: var(--card-margin);
+  min-width: var(--card-width);
+  height: var(--card-height);
+  justify-content: center;
+  align-items: center;
+}
+
+.InstaCard > img{
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10%;
+}
+
+
+
+.instagram-media { /* class name-sesitive (instagram embed script)*/
+  width: 100%;
+}
+
+
+.boutton-scroll-1{
+  right: 3px;
+}
+
+.boutton-scroll--1{
+  left: 3px;
+}
+
+.carousel-button {
+  color: white;
+  font-size: 3em;
+  position: absolute;
+  border: 0;
+  width: 50px;
+  height: 20%;
+  border-radius: 25px;
+  top: 40%;
+  background: rgba(0, 0, 0, 0.219);
+}
+/*
+.boutton-scroll-1:hover{
+
+}
+.boutton-scroll--1:hover{
+
+}
+*/
+.spacerInstaContact{
+  aspect-ratio: 1920/300;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url("../img/spacerInstaContact.svg");
+}
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=====CONTACT======
+
+*/
+
+.ContactSection{
+  background-color: #0c222f;
+}
+
+
+.ContactTitle {
+  margin-left: 15%;
+  font-size: 3vmax;
+}
+
+.ContactSection > .container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.preface{
+  font-size: 3vw;
+  margin-bottom: 3vh;
+}
+
+.mail {
+  font-size: 6vw;
+  font-weight: bold;
+  color: white;
+}
+
+.sub-text {
+  width: 66%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 2vw;
+}
+
+.tel {
+  text-decoration: underline; 
+  color: white;
+}
+
+.insta {
+  text-decoration: underline; 
+  color: white;
+}
+

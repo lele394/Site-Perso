@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    border:0;
+}
+
+body {
+    background-color: #0c222f;
+}
+
+.HeaderMain {
+    text-align: center;
+    margin:auto;
+    margin-top: 20vh;
+
+    color : white;
+    font-family: Arial, sans-serif;
+}
+
+img {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 10vh;
+    width: 60%;
+    max-height: 50vh;
+}

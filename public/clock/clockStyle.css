@@ -1,0 +1,193 @@
+* {
+  margin: 0;
+  border: 0;
+  transition: all 200ms ease, transform 1ms;
+}
+
+:root {
+  --numbers-size: 80vmin;
+
+  --pin-size: 4.5vmin;
+  --pin-color: grey;
+
+  --hand-border-radius: 200px;
+
+  --background-color: #0c222f;
+  --hours-hand-color: #4a4a4a;
+  --minutes-hand-color: white;
+  --seconds-hand-color: red;
+  --numbers-color: #174d6d;
+
+  --hours-hand-length: 21vmin;
+  --minutes-hand-length: 33vmin;
+  --seconds-hand-length: 30vmin;
+
+  --hours-hand-width: 1vmin;
+  --minutes-hand-width: 1vmin;
+  --seconds-hand-width: 0.2vmin;
+
+  --clock-fade-color: black;
+}
+
+.clock-section {
+  height: 100vh;
+  background-color: var(--background-color);
+  display: flex;
+  height: 100vh;
+  align-content: stretch;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.container {
+    translate: 50% 50%;
+
+}
+
+
+
+.hours {
+    width: var(--hours-hand-width);
+    height: var(--hours-hand-length);
+    background-color: var(--hours-hand-color);
+    transform:  rotate(var(--angle));
+
+}
+
+.minutes {
+    width: var(--minutes-hand-width);
+    height: var(--minutes-hand-length);
+    background-color: var(--minutes-hand-color);
+    transform:  rotate(var(--angle));
+    
+}
+
+.seconds {
+    width: var(--seconds-hand-width);
+    height: var(--seconds-hand-length);
+    background-color: var(--seconds-hand-color);
+    transform:  rotate(var(--angle));
+}
+
+.hand {
+    border-radius: var(--hand-border-radius);
+    position: absolute;
+    transform-origin: top center;
+    translate: -50%;
+}
+
+.pin {
+    position: absolute;
+    aspect-ratio: 1;
+    width: var(--pin-size);
+    border-radius: 50%;
+    background-color: var(--pin-color);
+    translate: -50% -50%;
+}
+
+svg {
+    position: absolute;
+    border-radius: 50%;
+    height: var(--numbers-size);
+    width: var(--numbers-size);
+    translate: -50% -50%;
+    box-shadow: inset 0px 0px 60px 5px var(--clock-fade-color);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.switch {
+    top: 5px;
+    right: 5px;
+	display: inline-block;
+	position: absolute;
+	width: 70px;
+	height: 40px;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.switch input {
+	position: absolute;
+	top: -30px;
+	left: -30px;
+	width: 0;
+	height: 0;
+}
+
+.switch input + span {
+    position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   background: #2e4364;
+   border-radius: 20px;
+}
+
+.switch input:checked + span {
+	background: #97b8eb3d;
+}
+
+.switch input + span:before {
+	content: "";
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	left: 4px;
+	width: 32px;
+	height: 32px;
+	background: #08222e;
+	border-radius: 50%;
+	transform: translateY(-50%);
+	transition: all .5s;
+}
+
+.switch input:checked + span:before {
+	background: white;
+
+}
+
+.switch input:checked + span:before {
+	left: 34px;
+}

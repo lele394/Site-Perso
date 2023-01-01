@@ -1,0 +1,68 @@
+
+footer{
+  color:white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 10%;
+  background: linear-gradient(0deg, rgba(2,0,36,0.9) 0%, rgba(0,0,0,0) 100%);
+  background-color: #0c222f;
+  font-size: 1em;
+  padding-bottom: 5vh;
+}
+
+footer > ul:before{
+  color:white;
+
+  content:attr(aria-label);
+  font-size:1.2em;
+  font-weight:bold;
+  margin-left: -10px;
+}
+footer > ul{padding-left: 20px;}
+
+footer > ul > li>a{
+  color: white;
+}
+
+.site-map{
+    color: white;
+  margin-top: 5vh;
+  min-width: 300px;
+}
+
+.contact{
+    color: white;
+
+  margin-top: 5vh;
+  min-width: 300px;
+}
+
+.logo {
+  margin-top: 5vh;
+  height: 75px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+
+/*
+<footer>
+<ul class="site-map" aria-label="Sections">
+  <li><a href="/public/alpha/alpha.html#Presentation">Présentation</a></li>
+  <li><a href="/public/alpha/alpha.html#Projets">Projets</a></li>
+  <li><a href="/public/alpha/alpha.html#Parcours">Parcours</a></li>
+  <li><a href="/public/alpha/alpha.html#Photographie">Photographie</a></li>
+  <li><a href="/public/alpha/alpha.html#Contact">Contact</a></li>
+</ul>
+
+<ul class="contact" aria-label="Contact">
+  <li>tél : 07.81.25.10.39</li>
+  <li>mail : lele.bechet@gmail.com</li>
+  <li>instagram : @nebulae_wanderer</li>
+  <li>Github : lele394</li>
+</ul>
+
+<img src="img/NW-logo.jpg" class="logo" />
+</footer>
+*/

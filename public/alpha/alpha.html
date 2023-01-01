@@ -1,0 +1,697 @@
+<!--
+  ======== TODO =========
+FAIT -> shuttle/star a update, pos update sur le pourcentage de scroll de la page, passer sur le delta
+
+Modifier la pres texte
+set min/max width/height => responsivité tel/ordi (@media?)
+
+le coin cassé du svg
+
+
+========== LANDING ANIMATION - REDEMPTION ARC ========
+FAIT -> switch animation sur window.requestAnimationFrame(MoveStuff); pour synchro l'actu gpu
+^ pas marché, tjr janky sur tel, tester avec des transitions CSS update en js
+                                  (pos update avec transition time 100ms?)
+
+
+
+NavBar #hummmm
+pages projets 
+  CORRIGER CELL AUTO
+etoiles sur la landing?
+styliser les titres
+
+UPGRADE -> section insta/photo/reseaux
+          Ajouter lien insta
+          texte sur le matos?
+
+
+UPGARDE -> Project cards #tester sur la playground avant implé
+          radial gradient sur pos souris (:before ?)
+          passer l'image de la card en fond 
+          update les images
+
+FAIT -> section contact
+FAIT -> footer
+FAIT -> switch photo carousel sur photos compressé a la place d'insta
+
+
+Frag CSS?
+Error handling Express => pour l'instant tout redirect 404
+
+
+
+Switch socket.io sur des switch case pour la console ptdr
+
+
+section :
+#Presentation
+#Projets
+#Parcours
+#Photographie
+#Contact
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style/alphaStyle.css" />
+    <link rel="stylesheet" href="style/Scrollbar.css" />
+    <link rel="stylesheet" href="style/footerStyle.css" />
+    
+    <link rel="icon" href="/public/NW-favicon.png">
+    <!-- ================= NAVBAR A REFAIRE ==================
+    <link rel="stylesheet" href="NavBar/NavBarStyle.css"> 
+    <script src="NavBar/NavBar.js" type="module"></script>
+    -->
+
+    <!-- link rel="icon" type="image/svg+xml" href="/vite.svg" / -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TestAlpha</title>
+
+    <script src="js/LandingAnimation.js" type="module"></script>
+
+    <!--svg path anim lib-->
+    <script src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.js"></script>
+    <!--carousel script-->
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  </head>
+
+  <body>
+    <section id="LandingSection">
+      <div class="ground"></div>
+      <div id="star"></div>
+      <div id="shuttle"></div>
+    </section>
+
+    <!--
+    <div class="NavBar">
+      <div id="NBshuttle"></div>
+      <ul class="NavBarLine">
+        <li id="NBPresentation"><button class="NBButton" onclick="document.getElementById('PresentationSection').scrollIntoView();">Presentation</button></li>
+        <li id="NBCV"><button class="NBButton" onclick="document.getElementById('cv').scrollIntoView();">CV</button></li>
+        <li id="NBParcours"><button class="NBButton" onclick="document.getElementById('parcours').scrollIntoView();">Parcours</button></li>
+        <li id="NBProjets"><button class="NBButton" onclick="document.getElementById('projets').scrollIntoView();">Projets</button></li>
+      </ul>
+    </div>
+    -->
+
+    <!--ANIMATED SPACER-->
+    <div class="spacers">
+      <svg
+        class="spacer1"
+        viewBox="0 0 1920 300"
+        width="1920"
+        height="300"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        version="1.1"
+      >
+        <!--rect = background du spacer, changer la couleur a la couleur de la page-->
+        <rect x="0" y="0" width="1920" height="300" fill="#0c222f"></rect>
+        <path
+          id="line1-1"
+          d="M0 201L26.7 190C53.3 179 106.7 157 160 145.8C213.3 134.7 266.7 134.3 320 136C373.3 137.7 426.7 141.3 480 144.8C533.3 148.3 586.7 151.7 640 161.2C693.3 170.7 746.7 186.3 800 177.3C853.3 168.3 906.7 134.7 960 125.5C1013.3 116.3 1066.7 131.7 1120 133.7C1173.3 135.7 1226.7 124.3 1280 116.5C1333.3 108.7 1386.7 104.3 1440 106.7C1493.3 109 1546.7 118 1600 138.7C1653.3 159.3 1706.7 191.7 1760 209C1813.3 226.3 1866.7 228.7 1893.3 229.8L1920 231L1920 0L1893.3 0C1866.7 0 1813.3 0 1760 0C1706.7 0 1653.3 0 1600 0C1546.7 0 1493.3 0 1440 0C1386.7 0 1333.3 0 1280 0C1226.7 0 1173.3 0 1120 0C1066.7 0 1013.3 0 960 0C906.7 0 853.3 0 800 0C746.7 0 693.3 0 640 0C586.7 0 533.3 0 480 0C426.7 0 373.3 0 320 0C266.7 0 213.3 0 160 0C106.7 0 53.3 0 26.7 0L0 0Z"
+          fill="#974000"
+        ></path>
+        <path
+          id="line2-1"
+          d="M0 136L26.7 136.7C53.3 137.3 106.7 138.7 160 147.8C213.3 157 266.7 174 320 184.3C373.3 194.7 426.7 198.3 480 195.7C533.3 193 586.7 184 640 170.3C693.3 156.7 746.7 138.3 800 134.3C853.3 130.3 906.7 140.7 960 144.5C1013.3 148.3 1066.7 145.7 1120 148C1173.3 150.3 1226.7 157.7 1280 162.8C1333.3 168 1386.7 171 1440 164.2C1493.3 157.3 1546.7 140.7 1600 129C1653.3 117.3 1706.7 110.7 1760 112.7C1813.3 114.7 1866.7 125.3 1893.3 130.7L1920 136L1920 0L1893.3 0C1866.7 0 1813.3 0 1760 0C1706.7 0 1653.3 0 1600 0C1546.7 0 1493.3 0 1440 0C1386.7 0 1333.3 0 1280 0C1226.7 0 1173.3 0 1120 0C1066.7 0 1013.3 0 960 0C906.7 0 853.3 0 800 0C746.7 0 693.3 0 640 0C586.7 0 533.3 0 480 0C426.7 0 373.3 0 320 0C266.7 0 213.3 0 160 0C106.7 0 53.3 0 26.7 0L0 0Z"
+          fill="#b05508"
+        ></path>
+        <path
+          id="line3-1"
+          d="M0 91L26.7 97.2C53.3 103.3 106.7 115.7 160 121C213.3 126.3 266.7 124.7 320 117.5C373.3 110.3 426.7 97.7 480 94.2C533.3 90.7 586.7 96.3 640 92.2C693.3 88 746.7 74 800 81.3C853.3 88.7 906.7 117.3 960 131C1013.3 144.7 1066.7 143.3 1120 129C1173.3 114.7 1226.7 87.3 1280 79.7C1333.3 72 1386.7 84 1440 87C1493.3 90 1546.7 84 1600 87.8C1653.3 91.7 1706.7 105.3 1760 116.5C1813.3 127.7 1866.7 136.3 1893.3 140.7L1920 145L1920 0L1893.3 0C1866.7 0 1813.3 0 1760 0C1706.7 0 1653.3 0 1600 0C1546.7 0 1493.3 0 1440 0C1386.7 0 1333.3 0 1280 0C1226.7 0 1173.3 0 1120 0C1066.7 0 1013.3 0 960 0C906.7 0 853.3 0 800 0C746.7 0 693.3 0 640 0C586.7 0 533.3 0 480 0C426.7 0 373.3 0 320 0C266.7 0 213.3 0 160 0C106.7 0 53.3 0 26.7 0L0 0Z"
+          fill="#c86a13"
+        ></path>
+        <path
+          id="line4-1"
+          d="M0 55L26.7 61.2C53.3 67.3 106.7 79.7 160 81.8C213.3 84 266.7 76 320 71.7C373.3 67.3 426.7 66.7 480 70.2C533.3 73.7 586.7 81.3 640 80C693.3 78.7 746.7 68.3 800 67.8C853.3 67.3 906.7 76.7 960 79C1013.3 81.3 1066.7 76.7 1120 75.5C1173.3 74.3 1226.7 76.7 1280 78.8C1333.3 81 1386.7 83 1440 80.7C1493.3 78.3 1546.7 71.7 1600 73.3C1653.3 75 1706.7 85 1760 86.7C1813.3 88.3 1866.7 81.7 1893.3 78.3L1920 75L1920 0L1893.3 0C1866.7 0 1813.3 0 1760 0C1706.7 0 1653.3 0 1600 0C1546.7 0 1493.3 0 1440 0C1386.7 0 1333.3 0 1280 0C1226.7 0 1173.3 0 1120 0C1066.7 0 1013.3 0 960 0C906.7 0 853.3 0 800 0C746.7 0 693.3 0 640 0C586.7 0 533.3 0 480 0C426.7 0 373.3 0 320 0C266.7 0 213.3 0 160 0C106.7 0 53.3 0 26.7 0L0 0Z"
+          fill="#e0811d"
+        ></path>
+        <path
+          id="line5-1"
+          d="M0 54L26.7 48.7C53.3 43.3 106.7 32.7 160 30.7C213.3 28.7 266.7 35.3 320 40.2C373.3 45 426.7 48 480 49C533.3 50 586.7 49 640 52C693.3 55 746.7 62 800 60.3C853.3 58.7 906.7 48.3 960 47.8C1013.3 47.3 1066.7 56.7 1120 53.5C1173.3 50.3 1226.7 34.7 1280 29.2C1333.3 23.7 1386.7 28.3 1440 36.2C1493.3 44 1546.7 55 1600 57C1653.3 59 1706.7 52 1760 51C1813.3 50 1866.7 55 1893.3 57.5L1920 60L1920 0L1893.3 0C1866.7 0 1813.3 0 1760 0C1706.7 0 1653.3 0 1600 0C1546.7 0 1493.3 0 1440 0C1386.7 0 1333.3 0 1280 0C1226.7 0 1173.3 0 1120 0C1066.7 0 1013.3 0 960 0C906.7 0 853.3 0 800 0C746.7 0 693.3 0 640 0C586.7 0 533.3 0 480 0C426.7 0 373.3 0 320 0C266.7 0 213.3 0 160 0C106.7 0 53.3 0 26.7 0L0 0Z"
+          fill="#f89827"
+        ></path>
+        <path
+          id="line1-2"
+          style="visibility: hidden"
+          d="M0 190L26.7 187.3C53.3 184.7 106.7 179.3 160 174.7C213.3 170 266.7 166 320 163.8C373.3 161.7 426.7 161.3 480 172.3C533.3 183.3 586.7 205.7 640 194.8C693.3 184 746.7 140 800 118.2C853.3 96.3 906.7 96.7 960 117.5C1013.3 138.3 1066.7 179.7 1120 192.8C1173.3 206 1226.7 191 1280 194C1333.3 197 1386.7 218 1440 221.8C1493.3 225.7 1546.7 212.3 1600 194.2C1653.3 176 1706.7 153 1760 151.7C1813.3 150.3 1866.7 170.7 1893.3 180.8L1920 191L1920 0L1893.3 0C1866.7 0 1813.3 0 1760 0C1706.7 0 1653.3 0 1600 0C1546.7 0 1493.3 0 1440 0C1386.7 0 1333.3 0 1280 0C1226.7 0 1173.3 0 1120 0C1066.7 0 1013.3 0 960 0C906.7 0 853.3 0 800 0C746.7 0 693.3 0 640 0C586.7 0 533.3 0 480 0C426.7 0 373.3 0 320 0C266.7 0 213.3 0 160 0C106.7 0 53.3 0 26.7 0L0 0Z"
+          fill="#974000"
+        ></path>
+        <path
+          id="line2-2"
+          style="visibility: hidden"
+          d="M0 162L26.7 157.5C53.3 153 106.7 144 160 150C213.3 156 266.7 177 320 183.7C373.3 190.3 426.7 182.7 480 168.8C533.3 155 586.7 135 640 125.3C693.3 115.7 746.7 116.3 800 127.8C853.3 139.3 906.7 161.7 960 172.8C1013.3 184 1066.7 184 1120 186C1173.3 188 1226.7 192 1280 184.3C1333.3 176.7 1386.7 157.3 1440 147.5C1493.3 137.7 1546.7 137.3 1600 143.7C1653.3 150 1706.7 163 1760 159.5C1813.3 156 1866.7 136 1893.3 126L1920 116L1920 0L1893.3 0C1866.7 0 1813.3 0 1760 0C1706.7 0 1653.3 0 1600 0C1546.7 0 1493.3 0 1440 0C1386.7 0 1333.3 0 1280 0C1226.7 0 1173.3 0 1120 0C1066.7 0 1013.3 0 960 0C906.7 0 853.3 0 800 0C746.7 0 693.3 0 640 0C586.7 0 533.3 0 480 0C426.7 0 373.3 0 320 0C266.7 0 213.3 0 160 0C106.7 0 53.3 0 26.7 0L0 0Z"
+          fill="#b05508"
+        ></path>
+        <path
+          id="line3-2"
+          style="visibility: hidden"
+          d="M0 87L26.7 88C53.3 89 106.7 91 160 92C213.3 93 266.7 93 320 93.7C373.3 94.3 426.7 95.7 480 105C533.3 114.3 586.7 131.7 640 139.3C693.3 147 746.7 145 800 140.2C853.3 135.3 906.7 127.7 960 123.7C1013.3 119.7 1066.7 119.3 1120 122.7C1173.3 126 1226.7 133 1280 134.2C1333.3 135.3 1386.7 130.7 1440 120.3C1493.3 110 1546.7 94 1600 93.2C1653.3 92.3 1706.7 106.7 1760 115.7C1813.3 124.7 1866.7 128.3 1893.3 130.2L1920 132L1920 0L1893.3 0C1866.7 0 1813.3 0 1760 0C1706.7 0 1653.3 0 1600 0C1546.7 0 1493.3 0 1440 0C1386.7 0 1333.3 0 1280 0C1226.7 0 1173.3 0 1120 0C1066.7 0 1013.3 0 960 0C906.7 0 853.3 0 800 0C746.7 0 693.3 0 640 0C586.7 0 533.3 0 480 0C426.7 0 373.3 0 320 0C266.7 0 213.3 0 160 0C106.7 0 53.3 0 26.7 0L0 0Z"
+          fill="#c86a13"
+        ></path>
+        <path
+          id="line4-2"
+          style="visibility: hidden"
+          d="M0 56L26.7 58C53.3 60 106.7 64 160 61.5C213.3 59 266.7 50 320 48.7C373.3 47.3 426.7 53.7 480 55.3C533.3 57 586.7 54 640 63.7C693.3 73.3 746.7 95.7 800 95.5C853.3 95.3 906.7 72.7 960 63.7C1013.3 54.7 1066.7 59.3 1120 61.8C1173.3 64.3 1226.7 64.7 1280 63.8C1333.3 63 1386.7 61 1440 58.7C1493.3 56.3 1546.7 53.7 1600 63.3C1653.3 73 1706.7 95 1760 102.7C1813.3 110.3 1866.7 103.7 1893.3 100.3L1920 97L1920 0L1893.3 0C1866.7 0 1813.3 0 1760 0C1706.7 0 1653.3 0 1600 0C1546.7 0 1493.3 0 1440 0C1386.7 0 1333.3 0 1280 0C1226.7 0 1173.3 0 1120 0C1066.7 0 1013.3 0 960 0C906.7 0 853.3 0 800 0C746.7 0 693.3 0 640 0C586.7 0 533.3 0 480 0C426.7 0 373.3 0 320 0C266.7 0 213.3 0 160 0C106.7 0 53.3 0 26.7 0L0 0Z"
+          fill="#e0811d"
+        ></path>
+        <path
+          id="line5-2"
+          style="visibility: hidden"
+          d="M0 34L26.7 41C53.3 48 106.7 62 160 61.3C213.3 60.7 266.7 45.3 320 44.7C373.3 44 426.7 58 480 61.5C533.3 65 586.7 58 640 58.7C693.3 59.3 746.7 67.7 800 64.8C853.3 62 906.7 48 960 41.8C1013.3 35.7 1066.7 37.3 1120 44C1173.3 50.7 1226.7 62.3 1280 61.3C1333.3 60.3 1386.7 46.7 1440 44.2C1493.3 41.7 1546.7 50.3 1600 56C1653.3 61.7 1706.7 64.3 1760 64.8C1813.3 65.3 1866.7 63.7 1893.3 62.8L1920 62L1920 0L1893.3 0C1866.7 0 1813.3 0 1760 0C1706.7 0 1653.3 0 1600 0C1546.7 0 1493.3 0 1440 0C1386.7 0 1333.3 0 1280 0C1226.7 0 1173.3 0 1120 0C1066.7 0 1013.3 0 960 0C906.7 0 853.3 0 800 0C746.7 0 693.3 0 640 0C586.7 0 533.3 0 480 0C426.7 0 373.3 0 320 0C266.7 0 213.3 0 160 0C106.7 0 53.3 0 26.7 0L0 0Z"
+          fill="#f89827"
+        ></path>
+      </svg>
+    </div>
+    <div class="sectionContainer">
+      <section class="PresentationSection" id="Presentation">
+        <div class="Container">
+          <img
+            class="Selfie"
+            src="img/Selfie.png"
+            alt="*image non contractuel"
+          />
+          <div class="presentationTextContainer">
+            <h1 class="presentationTitle">Léo BECHET</h1>
+            <div class="presentationSpacer"></div>
+            <p class="presentationText">
+              Passioné d'astronomie et de photographie, je suis actuellement en
+              Licence 3 physique fondamentale. Toujours curieux de découvrir de
+              nouveau domaines, ce site est pour moi l'occasion de découvrir le
+              webdev. <br> <br> Actuellement à l'UFR-ST de Besancon, je me forme a la
+              méhode scientifique. J'enrichis mes connaissances afin de mieux
+              comprendre l'univers qui nous entoure.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="spacerPresProj"></div>
+
+      <section class="ProjectSection" id="Projets">
+        <div class="ProjectContainer">
+          <h1 class="ProjectTitle">PROJETS EN COURS ET REALISES</h1>
+          <p>Card en cours de redesign, prototypes en cours disponible dans la CSS playground (dernière card) en dernier <a href="/public/playground/playground.html#s7"> ICI !</a>.  Images a refaire .</p>
+          <div class="ProjectCardsContainer">
+
+
+            <div class="project-card" style="--image-link: url(../img/CellAutomatonImg.jpg)">
+
+              <div class="card-content">
+                <h1>Cellular Automaton</h1>
+                <div class="description-container">
+                  <p>
+                    Un automate cellulaire est une simulation constitué de cellules
+                possédant un état. On peut a l'aide d'un set de règles
+                mathématiques simple, obtenir des comportements complexes.
+                <br />
+                <br />Projet en python et GLSL
+                  </p>
+                  <a href="Projects/CellularAutomaton.html" class="card-button">Find more...</a>
+                </div>
+      
+              </div>
+              
+            </div>
+            <!--
+            <div class="Card" id="CellularAutomaton">
+              <img class="CardImage" src="img/CellAutomatonImg.jpg" alt="" />
+              <h1 class="CardTitle">Cellular Automaton</h1>
+              <p class="CardText">
+                Un automate cellulaire est une simulation constitué de cellules
+                possédant un état. On peut a l'aide d'un set de règles
+                mathématiques simple, obtenir des comportements complexes.
+                <br />
+                <br />Projet en python et GLSL
+              </p>
+              <a class="CardButton" href="Projects/CellularAutomaton.html"
+                >Détails...</a
+              >
+            </div>-->
+
+
+            <div class="project-card" style="--image-link: url(../img/CSSCalculator.png)">
+
+              <div class="card-content">
+                <h1>Calculatrice CSS</h1>
+                <div class="description-container">
+                  <p>
+                    Projet réalisé comme petit challenge en CSS/HTML. Il présente
+                une faille de sécurité majeur avec l'utilisation de la fonction
+                eval(), pouvant permettre l'exécution de code malicieux <br />
+                <br />
+                Projet en CSS/Js/HTML
+                  </p>
+                  <a href="https://codepen.io/lele394/full/NWzyYqP" class="card-button">Find more...</a>
+                </div>
+      
+              </div>
+              
+            
+            </div>
+
+
+<!--
+            <div class="Card" id="CalculatriceCSS">
+              <img class="CardImage" src="img/CSSCalculator.png" alt="" />
+              <h1 class="CardTitle">Calculatrice CSS</h1>
+              <p class="CardText">
+                Projet réalisé comme petit challenge en CSS/HTML. Il présente
+                une faille de sécurité majeur avec l'utilisation de la fonction
+                eval(), pouvant permettre l'exécution de code malicieux <br />
+                <br />
+                Projet en CSS/Js/HTML
+              </p>
+              <a
+                class="CardButton"
+                href="https://codepen.io/lele394/full/NWzyYqP"
+                >Détails...</a
+              >
+            </div>-->
+
+
+
+            <div class="project-card" style="--image-link: url(../img/GLSL.png)">
+
+              <div class="card-content">
+                <h1>GLSL/HLSL Shader</h1>
+                <div class="description-container">
+                  <p>
+                    Ce projet a pour but d'explorer la génération de texture
+                procédurale à l'aide du
+                <a
+                  style="color: #ffffff"
+                  href="https://en.wikipedia.org/wiki/Perlin_noise"
+                  >bruit de perlin</a
+                >. La manipulation de texture nécessitent l'utilisation d'un
+                compute shader. <br /><br />
+                Projet en HLSL/GLSL
+                  </p>
+                  <a href="Projects/Construction.html" class="card-button">Find more...</a>
+                </div>
+      
+              </div>
+              
+            
+            </div>
+
+<!--
+            <div class="Card" id="GLSL">
+              <img class="CardImage" src="img/GLSL.png" alt="" />
+              <h1 class="CardTitle">GLSL/HLSL Shader</h1>
+              <p class="CardText">
+                Ce projet a pour but d'explorer la génération de texture
+                procédurale à l'aide du
+                <a
+                  style="color: #ffffff"
+                  href="https://en.wikipedia.org/wiki/Perlin_noise"
+                  >bruit de perlin</a
+                >. La manipulation de texture nécessitent l'utilisation d'un
+                compute shader. <br /><br />
+                <br />
+                Projet en HLSL/GLSL
+              </p>
+              <a class="CardButton" href="Projects/Construction.html"
+                >Détails...</a
+              >
+            </div>-->
+            <div class="project-card" style="--image-link: url(../img/CitaDiscordBot.png)">
+
+              <div class="card-content">
+                <h1>Cita, Discord Bot</h1>
+                <div class="description-container">
+                  <p class="CardText">
+                    Bot utilisant le webscrapping afin de trouver des citations
+                    contenant certains mots clefs. Le tout est envoyé sur les
+                    serveurs discord. Il est possible de bookmark les citations.
+                    <br />
+                    <br />
+                    Projet en Python
+                  </p>
+                  <a href="Projects/Construction.html" class="card-button">Find more...</a>
+                </div>
+      
+              </div>
+              
+            
+            </div>
+
+            <!--
+            <div class="Card" id="Cita">
+              <img class="CardImage" src="img/CitaDiscordBot.png" alt="" />
+              <h1 class="CardTitle">Cita, Discord Bot</h1>
+              <p class="CardText">
+                Bot utilisant le webscrapping afin de trouver des citations
+                contenant certains mots clefs. Le tout est envoyé sur les
+                serveurs discord. Il est possible de bookmark les citations.
+                <br />
+                <br />
+                Projet en Python
+              </p>
+              <a class="CardButton" href="Projects/Construction.html"
+                >Détails...</a
+              >
+            </div>-->
+
+            <div class="project-card" style="--image-link: url(../img/CSSPlayground.png)">
+
+              <div class="card-content">
+                <h1>CSS Playground</h1>
+                <div class="description-container">
+                  <p class="CardText">
+                    une page recensant certains projets CSS/HTML
+                <br />
+                <br />
+                <br />
+                <br />
+                    <br>
+                Projet en HTML/CSS/PYTHON
+                  </p>
+                  <a href="/public/playground/playground.html" class="card-button">Find more...</a>
+                </div>
+      
+              </div>
+              
+            
+            </div>
+
+
+
+
+
+
+            <div class="project-card" style="--image-link: url(../img/HTMLClock.png)">
+
+              <div class="card-content">
+                <h1>Horloge</h1>
+                <div class="description-container">
+                  <p class="CardText">
+                    Horloge en HTML/CSS piloté par javascript. Elle possède un switch pour activer ou désactiver un theme light
+                <br />
+                <br />
+                    <br>
+                Projet en HTML/CSS/JS
+                  </p>
+                  <a href="/public/clock/clock.html" class="card-button">Find more...</a>
+                </div>
+      
+              </div>
+              
+            
+            </div>
+
+
+            <!--
+            <div class="Card" id="Playground">
+              <img class="CardImage" src="img/CSSPlayground.png" alt="" />
+              <h1 class="CardTitle">CSS Playground</h1>
+              <p class="CardText">
+                une page recensant certains projets CSS/HTML
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                Projet en HTML/CSS/PYTHON
+              </p>
+              <a class="CardButton" href="/public/playground/playground.html"
+                >Détails...</a
+              >
+            </div>-->
+          </div>
+        </div>
+      </section>
+
+
+
+
+
+
+
+
+      <div class="spacerProjParcours"></div>
+
+      <section class="ParcourSection" id="Parcours">
+        <h1 class="ParcoursTitle">Parcours Académique et diplomes</h1>
+        <div class="ParcoursContainer">
+          <div class="ParcoursElementContainer">
+            <div class="ParcoursElementDate"><p>2016</p></div>
+            <div class="ParcoursElementTitle">
+              <p>Stage de 3ème au département énerige de FEMTO-ST</p>
+            </div>
+          </div>
+
+          <div class="ParcoursElementContainer">
+            <div class="ParcoursElementDate"><p>2017</p></div>
+            <div class="ParcoursElementTitle">
+              <p>12e place nationale, concours course en cours</p>
+            </div>
+          </div>
+
+          <div class="ParcoursElementContainer">
+            <div class="ParcoursElementDate"><p>2017</p></div>
+            <div class="ParcoursElementTitle"><p>Lycée Jacques Duhamel</p></div>
+          </div>
+
+          <div class="ParcoursElementContainer">
+            <div class="ParcoursElementDate"><p>2019</p></div>
+            <div class="ParcoursElementTitle">
+              <p>BAC S Sciences de l'ingénieurs, mention Assez-Bien</p>
+            </div>
+          </div>
+
+          <div class="ParcoursElementContainer">
+            <div class="ParcoursElementDate"><p>2019</p></div>
+            <div class="ParcoursElementTitle">
+              <p>CPGE PCSI, Lycée Raoul FOLLEREAU, BELFORT</p>
+            </div>
+          </div>
+
+          <div class="ParcoursElementContainer">
+            <div class="ParcoursElementDate"><p>2020</p></div>
+            <div class="ParcoursElementTitle">
+              <p>CPGE PC, Lycée Raoul FOLLEREAU, BELFORT</p>
+            </div>
+          </div>
+
+          <div class="ParcoursElementContainer">
+            <div class="ParcoursElementDate"><p>2021</p></div>
+            <div class="ParcoursElementTitle">
+              <p>Licence 3 Physique Fondamentale, UFR-ST Besancon</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="spacerParcoursInsta"></div>
+
+      <section class="InstaSection" id="Photographie">
+        <h1 class="InstaTitle">PHOTOGRAPHIE</h1>
+
+        <div class="InstaCarousel">
+          <div class="InstaCarouselContainer" id="InstaCarousel">
+            <div></div>
+            <!--spacer decomblage-->
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/1.jpg" alt="1.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/2.jpg" alt="2.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/3.jpg" alt="3.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/4.jpg" alt="4.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/5.jpg" alt="5.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/6.jpg" alt="6.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/7.jpg" alt="7.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/8.jpg" alt="8.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/9.jpg" alt="9.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/10.jpg" alt="10.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/11.jpg" alt="11.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/12.jpg" alt="12.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/13.jpg" alt="13.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/14.jpg" alt="14.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/15.jpg" alt="15.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/16.jpg" alt="16.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/17.jpg" alt="17.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/18.jpg" alt="18.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/19.jpg" alt="19.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/20.jpg" alt="20.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/21.jpg" alt="21.jpg" />
+            </div>
+
+            <div class="InstaCard">
+              <img src="img/insta-carousel/22.jpg" alt="22.jpg" />
+            </div>
+
+            <script src="js/InstaCarousel.js"></script>
+          </div>
+          <button
+            class="carousel-button boutton-scroll--1"
+            onclick="InstaCarouselClick(-1)"
+          >
+            <
+          </button>
+          <button
+            class="carousel-button boutton-scroll-1"
+            onclick="InstaCarouselClick(1)"
+          >
+            >
+          </button>
+        </div>
+      </section>
+
+      <div class="spacerInstaContact"></div>
+
+      <section class="ContactSection" id="Contact">
+        <h1 class="ContactTitle"><!--CONTACT--></h1>
+        <div class="container">
+          <p class="preface">Une requète, une question?<br /></p>
+          <h1 class="mail">lele.bechet@gmail.com</h1>
+          <div class="sub-text">
+            <div>
+              <img src="img/telIcon.png" style="width: 2vw; height: 2vw" /> :
+              <a href="tel:+33781251039" class="tel">07.81.25.10.39</a>
+            </div>
+
+            <div>
+              <img src="img/instaIcon.png" style="width: 2vw; height: 2vw" /> :
+              <a
+                href="https://www.instagram.com/nebulae_wanderer/"
+                class="insta"
+                >@nebulae_wanderer</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <ul class="site-map" aria-label="Sections">
+        <li><a href="#Presentation">Présentation</a></li>
+        <li><a href="#Projets">Projets</a></li>
+        <li><a href="#Parcours">Parcours</a></li>
+        <li><a href="#Photographie">Photographie</a></li>
+        <li><a href="#Contact">Contact</a></li>
+      </ul>
+
+      <ul class="contact" aria-label="Contact">
+        <li>tél : 07.81.25.10.39</li>
+        <li>mail : lele.bechet@gmail.com</li>
+        <li>instagram : @nebulae_wanderer</li>
+        <li>Github : lele394</li>
+      </ul>
+
+      <img src="img/NW-logo.jpg" class="logo" />
+    </footer>
+
+    <!-- SPACER 1 ANIMATION-->
+    <script>
+      const AnimSpeed = 5000;
+
+      const path1 = KUTE.fromTo(
+        "#line1-1",
+        { path: "#line1-1" },
+        { path: "#line1-2" },
+        { repeat: 9999, duration: AnimSpeed, yoyo: true }
+      );
+
+      const path2 = KUTE.fromTo(
+        "#line2-1",
+        { path: "#line2-1" },
+        { path: "#line2-2" },
+        { repeat: 9999, duration: AnimSpeed, yoyo: true }
+      );
+
+      const path3 = KUTE.fromTo(
+        "#line3-1",
+        { path: "#line3-1" },
+        { path: "#line3-2" },
+        { repeat: 9999, duration: AnimSpeed, yoyo: true }
+      );
+
+      const path4 = KUTE.fromTo(
+        "#line4-1",
+        { path: "#line4-1" },
+        { path: "#line4-2" },
+        { repeat: 9999, duration: AnimSpeed, yoyo: true }
+      );
+
+      const path5 = KUTE.fromTo(
+        "#line5-1",
+        { path: "#line5-1" },
+        { path: "#line5-2" },
+        { repeat: 9999, duration: AnimSpeed, yoyo: true }
+      );
+
+      path1.start();
+      path2.start();
+      path3.start();
+      path4.start();
+      path5.start();
+    </script>
+  </body>
+</html>

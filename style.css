@@ -1,0 +1,425 @@
+* {
+    margin: 0;
+    border: 0;
+    font-family: Arial;
+  }
+  
+  section {
+    display: flex;
+    height: 100vh;
+    align-content: stretch;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+
+
+section > * {
+  margin: 50px;
+}
+
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MC BUTTON*/
+
+  
+
+#s3 {
+    background-color: #064164;
+  }
+  
+  .b3 {
+    --size: 15vh;
+    --shade-front: 0.2;
+    --shade-side: 0.4;
+    --animation-rotation-x: 33deg;
+    --animation-rotation-y: -45deg;
+    --animation-time: 500ms;
+    --animation-translation-z: -70px;
+  
+    perspective: 5000px;
+    cursor: pointer;
+  }
+  
+  .b3 > .bloc-translator {
+    position: relative;
+    transform-style: preserve-3d;
+    width: var(--size);
+    height: var(--size);
+    transition: all var(--animation-time) cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+  
+  .bloc-translator > .bloc {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: all var(--animation-time) cubic-bezier(0, 0.97, 0.71, 1.02);
+  }
+  
+  .bloc > .front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        rgba(0, 0, 0, var(--shade-front)),
+        rgba(0, 0, 0, var(--shade-front))
+      ),
+      url("public/playground/img/MCGrassSide.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    transform: translateZ(calc(var(--size) * -0.5));
+  }
+  
+  .bloc > .side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        rgba(0, 0, 0, var(--shade-side)),
+        rgba(0, 0, 0, var(--shade-side))
+      ),
+      url("public/playground/img/MCGrassSide2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    transform: rotateY(-90deg) translateZ(calc(var(--size) * 0.5));
+  }
+  
+  .bloc > .top {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-image: url("public/playground/img/MCGrassTop.jpg");
+    transform: rotateX(90deg) translateZ(calc(var(--size) * 0.5));
+  }
+  
+  .server-name-text {
+    text-align: center;
+    height: 0px;
+    overflow: hidden;
+    color: white;
+    font-family: "Arial";
+    transition: all var(--animation-time) cubic-bezier(0, 0, 0.05, 0.88);
+  }
+  
+  .b3:hover .bloc {
+    transform: rotateX(var(--animation-rotation-x))
+      rotateY(var(--animation-rotation-y));
+  }
+  
+  .b3:hover .bloc-translator {
+    transform: translateY(var(--animation-translation-z));
+  }
+  
+  .b3:hover .server-name-text {
+    height: 30px;
+  }
+
+
+/*
+
+
+
+
+
+
+
+
+
+BUTTON 5 SECTION 5 NW
+*/
+
+#s5 {
+    background-color: #316cc5;
+  }
+
+.b5{
+    --size: 15vh;
+    --z-translate-step: -20px;
+    --shade-front: 0.2;
+    --shade-side: 0.4;
+    --animation-rotation-x: -20deg;
+    --animation-rotation-y: 20deg;
+    --animation-time: 500ms;
+    --animation-translation-z: -20px;
+
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    perspective: 5000px;
+    cursor: pointer;
+}
+
+.b5 > .translator-NW{
+    position: relative;
+    transform-style: preserve-3d;
+    width: var(--size);
+    height: var(--size);
+    transition: all var(--animation-time) cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.translator-NW > .bloc {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: all var(--animation-time) cubic-bezier(0, 0.97, 0.71, 1.02);
+  }
+
+  .bloc > .ground {
+    position: absolute;
+    width: 100%;
+    height: 20%;
+    margin-top: calc((var(--size) - var(--size)*0.22));
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-image: url("public/indexIMG/ground.png");
+    transform:  translateZ(calc(var(--z-translate-step) * 1));
+
+  }
+
+  .bloc > .shuttle {
+    margin: calc((var(--size) - var(--size)*0.4)/2); /*0.6 => 60% width height*/
+    margin-top: calc((var(--size) - var(--size)*0.2)/2);
+
+    position: absolute;
+    width: 40%;
+    height: 40%;
+    background:  url("public/indexIMG/shuttle.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transform:  translateZ(calc(var(--z-translate-step) * 2));
+
+  }
+  
+  .bloc > .star {
+    margin-left: calc((var(--size) - var(--size)*0.2)/2); /*0.6 => 60% width height*/
+    margin-right: calc((var(--size) - var(--size)*0.2)/2); /*0.6 => 60% width height*/
+    margin-top: calc((var(--size) - var(--size)*0.7)/2);
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-image: url("public/indexIMG/star.png");
+    transform:  translateZ(calc(var(--z-translate-step) * 3));
+
+  }
+
+  .bloc > .background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-image: url("public/indexIMG/background.png");
+    transform:  translateZ(calc(var(--z-translate-step) * 4));
+
+  }
+
+.server-name-text {
+    text-align: center;
+    height: 0px;
+    overflow: hidden;
+    color: white;
+    font-family: "Arial";
+    transition: all var(--animation-time) cubic-bezier(0, 0, 0.05, 0.88);
+}
+  
+.b5:hover .bloc {
+    transform: rotateX(var(--animation-rotation-x))
+    rotateY(var(--animation-rotation-y));
+}
+
+/*
+.b5:hover .shuttle{
+    transform: translateY(calc(-20px));
+}*/
+
+.b5:hover .server-name-text {
+    height: 30px;
+  }
+
+
+
+
+
+
+
+
+  
+  .b6{
+    --line-width: 5px;
+    --line-height: 162px;
+    --border-radius: 20px;
+  
+    --X: rgb(56, 228, 108);
+    --O: rgb(212, 100, 119);
+    cursor: pointer;
+    aspect-ratio: 1/1;
+    display: grid;
+    grid: [b1] / [b1];
+    transition: all ease 450ms;
+  }
+  
+  .b6:hover {
+    transform: rotate(-90deg);
+  }
+  
+  .line-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+    z-index: 0;
+  }
+  
+  .linegroup {
+    height: 100%;
+    width: 100%;
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    z-index: -1;
+  }
+  
+  .horizontal{
+    z-index: 1;
+  }
+  
+  .vertical {
+    z-index: 2;
+    transform: rotate(90deg);
+  }
+  
+  
+  .line {
+    background-color: white;
+    width: var(--line-width);
+    height: var(--line-height);
+    border-radius: var(--border-radius);
+  }
+  
+  
+  .symbol-container {
+    z-index: 4;
+    color: white;
+    display: grid;
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+  }
+  
+  
+  .symbol-container > * {
+    color: white;
+    transform: scale(0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .symbol-container:hover > * {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all ease 100ms var(--delay);
+    transform: scale(1.7);
+  }
+  
+  
+  .c1-1 {
+   grid-row: 1/2;
+   grid-column: 1/2;
+  }
+  
+  .c1-2 {
+    grid-row: 2/3;
+    grid-column: 1/2;
+   }
+   .c1-3 {
+    grid-row: 3/4;
+    grid-column: 1/2;
+   }
+  
+  
+  
+  
+  
+   .c2-1 {
+    grid-row: 1/2;
+    grid-column: 2/3;
+   }
+   
+   .c2-2 {
+     grid-row: 2/3;
+     grid-column: 2/3;
+    }
+    .c2-3 {
+     grid-row: 3/4;
+     grid-column: 2/3;
+    }
+  
+  
+  
+  
+  
+  
+    .c3-1 {
+      grid-row: 1/2;
+      grid-column: 3/3;
+     }
+     
+     .c3-2 {
+       grid-row: 2/3;
+       grid-column: 3/3;
+      }
+      .c3-3 {
+       grid-row: 3/4;
+       grid-column: 3/3;
+      }
+  
+      .button-text {
+        text-align: center;
+        height: 0px;
+        overflow: hidden;
+        color: white;
+        font-family: "Arial";
+        transition: all 450ms cubic-bezier(0, 0, 0.05, 0.88);
+    }
+  
+    .b6:hover .button-text {
+      height: 30px;
+    }
+  

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Playground</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="playgroundStyle.css" rel="stylesheet" />
+  </head>
+  <body>
+    <section id="s1">
+      <h1 style="font: Arial; color: white; margin-bottom: 10vh">
+        Stacking stuff (grid et z-index)
+      </h1>
+
+      <div
+        onclick="location.href='https://codepen.io/lele394/pen/VwdBWbW';"
+        class="b1"
+      >
+        <div class="sub1"></div>
+        <div class="sub2"></div>
+        <div class="sub3"></div>
+      </div>
+    </section>
+
+    <section id="s2">
+      <h1 style="font: Arial; color: white; margin-bottom: 10vh">@keyframes</h1>
+
+      <div
+        class="b2"
+        onclick="location.href='https://codepen.io/lele394/pen/bGKxdrq'"
+      >
+        <div class="Border">
+          <div class="BackgroundColor"></div>
+          <div class="WhiteBox"></div>
+          <div class="ButtonText"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3">
+      <h1 style="font: Arial; color: white; margin-bottom: 17vh">
+        MC bloc anim button
+      </h1>
+      <div
+        class="b3"
+        onclick="location.href='https://codepen.io/lele394/pen/eYKLLLv'"
+      >
+        <div class="bloc-translator">
+          <div class="bloc">
+            <div class="front"></div>
+            <div class="side"></div>
+            <div class="top"></div>
+          </div>
+        </div>
+        <h1 class="server-name-text">Kovarak</h1>
+      </div>
+    </section>
+
+    <section
+      id="s4"
+      style="
+        background-color: #0c222f;
+        display: flex;
+        height: 100vh;
+        align-content: stretch;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <div id="heart" style="display: grid; position: relative">
+        <div
+          id="circle"
+          style="
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: rgb(226, 8, 63);
+            border-radius: 100px;
+            grid-column: 1;
+            grid-row: 1;
+            z-index: 1;
+            transform: translateX(calc(0.5 * 1.41421 * 15px))
+              translateY(calc(-0.5 * 1.41421 * 15px));
+          "
+        ></div>
+        <div
+          id="circle"
+          style="
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: rgb(226, 8, 63);
+            border-radius: 100px;
+            grid-column: 1;
+            grid-row: 1;
+            z-index: 1;
+            transform: translateX(calc(-0.5 * 1.41421 * 15px))
+              translateY(calc(-0.5 * 1.41421 * 15px));
+          "
+        ></div>
+        <div
+          id="square"
+          style="
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            background-color: rgb(226, 8, 63);
+            transform: rotate(45deg);
+            grid-column: 1;
+            grid-row: 1;
+          "
+        ></div>
+      </div>
+    </section>
+
+
+    <section id="s5">
+      <div class="b5"  onclick="location.href='https://codepen.io/lele394/pen/vYrVqJG'">
+        
+        <div class="translator-NW">
+          <div class="bloc">
+            <div class="background"></div>
+            <div class="ground"></div>
+            <div class="star"></div>
+            <div class="shuttle"></div>
+          </div>
+        </div>
+        <h1 class="server-name-text">Nebulae Wanderer</h1>
+      </div>
+    </section>
+
+
+
+    <section id="s6">
+
+      <div class="b6" onclick="location.href='https://codepen.io/lele394/pen/jOKJapV'">
+        <div class="line-container">
+          <div class="vertical linegroup">
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+          <div class="horizontal linegroup">
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+        </div>
+
+        <div class="symbol-container">
+          <div class="c1-1" style="--delay: 50ms"><div class="ttt-symbol" style="color: var(--X)">X</div></div>
+          <div class="c1-2" style="--delay: 200ms"><div class="ttt-symbol" style="color: var(--O)">O</div></div>
+          <div class="c1-3" style="--delay: 400ms"><div class="ttt-symbol" style="color: var(--O)">O</div></div>
+
+          <div class="c2-1" style="--delay: 150ms"><div class="ttt-symbol" style="color: var(--X)">X</div></div>
+          <div class="c2-2" style="--delay: 300ms"><div class="ttt-symbol" style="color: var(--X)">X</div></div>
+          <div class="c2-3" style="--delay: 100ms"><div class="ttt-symbol" style="color: var(--O)">O</div></div>
+
+          <div class="c3-1" style="--delay: 350ms"><div class="ttt-symbol" style="color: var(--X)">X</div></div>
+          <div class="c3-2" style="--delay: 450ms"><div class="ttt-symbol" style="color: var(--O)">O</div></div>
+          <div class="c3-3" style="--delay: 250ms"><div class="ttt-symbol" style="color: var(--X)">X</div></div>
+        </div>
+        <h1 class="button-text">Tic Tac Toe</h1>
+
+      </div>
+
+    </section>
+
+
+    <section id="s7">
+
+      <div class="project-card" style="--image-link: url(/public/alpha/img/CellAutomatonImg.jpg)">
+
+        <div class="card-content">
+          <h1>Card Title</h1>
+          <div class="description-container">
+            <p>
+              Un automate cellulaire est une simulation constitué de cellules
+              possédant un état. On peut a l'aide d'un set de règles
+              mathématiques simple, obtenir des comportements complexes.
+            </p>
+            <a href="#s7" class="card-button">Find more...</a>
+          </div>
+
+        </div>
+        
+      </div>
+
+
+    </section>
+
+  </body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!--
+
+    server fcked, switch to emit, not changing message data, wtf
+
+
+    ====================== SERVER SIDE WIN DETECTIO (carré magique)
+
+    function TTT_Winner( grid ) {
+  /* 
+  check winners de la grid, return socket.id du gagnant, ou null si il n'y en a pas
+  https://mathworld.wolfram.com/MagicSquare.html
+  carré magique : somme diag col row donne 15
+  [
+    [ 8 , 1 , 6 ],
+    [ 3 , 5 , 7 ],
+    [ 4 , 9 , 2 ]
+  ]*/
+  var carreMagique = [
+  [ 8 , 1 , 6 ],
+  [ 3 , 5 , 7 ],
+  [ 4 , 9 , 2 ]
+  ];
+  /* check les joueurs en présence*/
+  var joueurs = [0];
+  for(const row of grid) {
+    for(const element of row) {
+      if(!joueurs.includes(element))
+      {
+        joueurs.push(element)
+      }
+    }
+  }
+  joueurs.splice(0,1); //rm le 0
+  for(const p of joueurs){
+    //calcul somme pour les joueurs
+    var sum = 0;
+    var x=0;
+    for(const row of grid){
+      y = 0
+      for(const item of row){
+        if(item == p){sum += carreMagique[x][y]}
+        y ++
+      }
+      x ++
+    }
+    if(sum == 15){return p}
+  }
+  return null;
+}
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicTacToe</title>
+    <link rel="stylesheet" href="tictactoeStyle.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+
+    <h1>Leo's Tic Tac Toe</h1>
+    <div class="board">
+
+        <!--
+            1 2 3
+          1  | | 
+          2  | |
+          3  | |
+
+        -->
+        <div class="row" id="r1">
+            <button class="case" id="c1-1"><div class="content"></div></button>
+            <button class="case" id="c1-2"><div class="content"></div></button>
+            <button class="case" id="c1-3"><div class="content"></div></button>
+        </div>
+
+        <div class="row" id="r2">
+            <button class="case" id="c2-1"><div class="content"></div></button>
+            <button class="case" id="c2-2"><div class="content"></div></button>
+            <button class="case" id="c2-3"><div class="content"></div></button>
+        </div>
+
+        <div class="row" id="r3">
+            <button class="case" id="c3-1"><div class="content"></div></button>
+            <button class="case" id="c3-2"><div class="content"></div></button>
+            <button class="case" id="c3-3"><div class="content"></div></button>
+        </div>
+
+
+
+    </div>
+    <button id="reset">RESET</button>
+    <script src="tictactoe.js"></script>
+
+</body>
+</html>
