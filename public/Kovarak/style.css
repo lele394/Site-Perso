@@ -1,0 +1,187 @@
+* {padding: 0; margin: 0}
+
+:root{
+    /*https://colorhunt.co/palette/1a1a1b333f4437aa9c94f3e4*/
+
+    --dark: #1A1A1B;
+    --ldark: #333F44;
+    --teal: #37AA9C;
+    --light: #94F3E4;
+    --white: white;
+
+    font-family: Arial;
+}
+
+
+body {
+    background: var(--dark);
+}
+
+.header{
+    padding: 20px 0 20px 20%;
+    background: var(--ldark) linear-gradient(0deg, var(--teal) 0%, rgba(0,0,0,0) 2%);
+    border-radius: 0 0 20px 20px;
+}
+
+.header > .title {
+
+    font-size: 3em;
+    color: var(--white);
+}
+
+.ip {
+    padding-top: 50px;
+    text-decoration: none;
+    color: var(--white);
+    font-size: 2em;
+}
+.ip:visited{color: var(--white);}
+
+.presentation {
+    margin: 5vh 5vw 0 5vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+.video{
+    border-radius: 30px;
+    width: 90vw;
+    max-width: 560px;
+    aspect-ratio: 560/315;
+    border: solid 1px var(--light)
+}
+
+.presentation > .text {
+    color: var(--white);
+    width: 500px;
+    min-width: 200px;
+    margin: 20px;
+    border-radius: 20px;
+    font-size: 1.3em;
+    background: var(--ldark);
+    padding: 20px;
+    border: solid 1px var(--light);
+}
+
+
+
+.maps {
+    padding-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    gap : 40px;
+    align-items: center;
+}
+
+.maps > .title {
+    font-family: Arial;
+    font-size: 2.1em;
+    color: var(--white);
+    margin-bottom: 50px;
+}
+
+.maps > .title:before {
+    content: "";
+    display:block;
+    position: relative;
+    width: 60vw;
+    height: 3px;
+    background: linear-gradient(90deg, var(--light) , rgba(0,0,0,0) );
+    border-radius: 5px;
+    transform: translateY(1.3em) translate(-10px);
+}
+
+
+.dimension {
+    max-height: 30vh;
+    width: 70vw;
+    max-width: 700px;
+    display: flex;
+    border-radius: 20px;
+    transition: all ease 240ms;
+}
+
+.dimension:hover {
+    transform: scale(1.04);
+}
+
+.dimension-text {
+    color: var(--white);
+    font-size: 3ch;
+}
+.dimension-text:before {
+    content: "";
+    display:block;
+    position: relative;
+    width: 140%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--light) , rgba(0,0,0,0) );
+    border-radius: 5px;
+    transform: translateY(1.3em) translate(-10px);
+}
+
+.dimension-center{
+    width: 60%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.map-btn {
+    cursor: pointer;
+    background: var(--ldark);
+    color: var(--white);
+    font-size: 2ch;
+    width: 6em;
+    height: 2em;
+    border-radius: 1.5em;
+    border: solid 3px var(--teal);
+    transition: all ease 200ms
+}
+
+.map-btn:hover {
+    border: 0px;
+    background: #333F44;
+    color: var(--white);
+    width: 7em;
+    border: solid 1px var(--light)
+}
+
+#overworld{
+    color: var(--white);
+    background: linear-gradient(-90deg, rgba(0, 0, 0, 0.85) 50%, rgba(0,0,0,0) 80%), url(./img/overworld.png);
+    aspect-ratio: 1920/1080;
+    background-size: cover;
+}
+
+#nether{
+    color: var(--white);
+    background: linear-gradient(-90deg, rgba(0, 0, 0, 0.85) 50%, rgba(0,0,0,0) 80%), url(./img/nether.png);
+    aspect-ratio: 1920/1017;
+    background-size: cover;
+}
+
+#metro{
+    color: var(--white);
+    background: linear-gradient(-90deg, rgba(0, 0, 0, 0.85) 50%, rgba(0,0,0,0) 80%), url(./img/metro.png);
+    aspect-ratio: 1920/1017;
+    background-size: cover;
+}
+
+
+.retro {
+    margin: 20vh 0 20vh 0;
+    cursor: pointer;
+    background: var(--ldark);
+    color: var(--white);
+    font-size: 2ch;
+    width: 6em;
+    height: 2em;
+    border-radius: 1.5em;
+    border: solid 3px var(--teal);
+    transition: all ease 200ms
+}

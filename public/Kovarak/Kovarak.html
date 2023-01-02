@@ -1,61 +1,72 @@
-<head>
-  <style media="screen">
-    .styled {
-      border: 10px;
-    font-family: "AvenirNext","Helvetica Neue",Helvetica,Arial,sans-serif;
-    line-height: 2.5;
-    padding: 0 20px;
-    font-size: 150%;
-    text-align: center;
-    color: #fff;
-    border-radius: 10px;
-    background-color: rgba(0, 252, 245, 1);
-    background-image: rgba(0, 0, 0, .2),
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section class="header">
+      <h1 class="title">KOVARAK</h1>
+    </section>
 
-    }
-    .styled:hover {
-        background-color: rgba(0, 237, 229, 1);
-        animation-delay: 250ms;
-        size:250%;
-    }
-    .styled:active {
-        background-color: rgba(0, 201, 195, 1);
-    }
+    <div style="display:grid;justify-content:center">
+      <a class="ip" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">kovarak.mine.fun</a>
+    </div>
 
-    .text {
-      font-size: 250% ;
-      font-family: "AvenirNext","Helvetica Neue",Helvetica,Arial,sans-serif;
+    <section class="presentation">
+      <iframe
+        class="video"
 
-    }
+        src="https://www.youtube.com/embed/LkqV_AI3J2M"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
 
-
-  </style>
-
-
-
-
-
+      <p class="text">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur
+        soluta necessitatibus voluptas rerum deserunt unde impedit. Aperiam
+        doloremque 
+      </p>
+    </section>
 
 
+    <section class="maps">
+        <h1 class="title">MAPS</h1>
 
-</head>
+        <div class="dimension" id="overworld">
+            <div style="width: 40%"></div>
+            <div class="dimension-center">
+              <h2 class="dimension-text">Overworld</h2>
+              <button class="map-btn" onclick="location.href='./Kovarak-retro/Overworld_map.html';">See Map</button>
+            </div>
+        </div>
+
+        <div class="dimension" id="nether">
+          <div style="width: 40%"></div>
+          <div class="dimension-center">
+            <h2 class="dimension-text">Nether</h2>
+            <button class="map-btn" onclick="location.href='./Kovarak-retro/Nether_map.html';">See Map</button>
+          </div>
+        </div>
+
+        <div class="dimension" id="metro">
+          <div style="width: 40%"></div>
+          <div class="dimension-center">
+            <h2 class="dimension-text">Metro</h2>
+            <button class="map-btn" onclick="location.href='./Kovarak-retro/NetherMetro_map.html';">See Map</button>
+          </div>
+        </div>
 
 
+    </section>
 
-<body>
-
-  <div style="text-align:center; background-image: url('https://cdn.discordapp.com/attachments/579407665856380929/996036993769279589/Screenshot_20190713-100233_Gallery.jpg'); height: 100vh;">
-    <p class="text">Site des cartes du serv de flo </p>
-    <a class="text" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">kovarak.mine.fun</a>
-    <p></p>
-    <button class="favorite styled"   type="button"         onclick="location.href='./Overworld_map.html';" > Overworld map </button>
-    <p></p>
-    <button class="favorite styled"   type="button"         onclick="location.href='./Nether_map.html';" > Nether map </button>
-    <p></p>
-    <button class="favorite styled"   type="button"         onclick="location.href='./NetherMetro_map.html';" > Nether/Overworld metro map </button>
-    <p></p>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/LkqV_AI3J2M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
- 
-
-  </div>
-</body>
+    <div style="display:grid;justify-content:center">
+      <button class="retro" onclick="location.href='./Kovarak-retro/Kovarak-retro.html';">Go Rétro</button>
+    </div>
+  </body>
+</html>
