@@ -88,22 +88,42 @@ section :
     <!--burger menu-->
     <nav>
       <div id="menu-burger">
-        <input type="checkbox" id="menu-burger-cb"/>
+        <input type="checkbox" id="menu-burger-cb" />
         <div id="burger">
           <span></span>
           <span></span>
           <span></span>
         </div>
-        
+
         <!--Menu-->
 
         <ul>
           <h1>Menu</h1>
-          <button>Présentation</button>
-          <button>Projets</button>
-          <button>Parcours</button>
-          <button>Photographie</button>
-          <button>Contact</button>
+          <button
+            onClick="document.getElementById('Presentation').scrollIntoView(); document.getElementById('menu-burger-cb').checked = false;"
+          >
+            Présentation
+          </button>
+          <button
+            onClick="document.getElementById('Projets').scrollIntoView(); document.getElementById('menu-burger-cb').checked = false;"
+          >
+            Projets
+          </button>
+          <button
+            onClick="document.getElementById('Parcours').scrollIntoView(); document.getElementById('menu-burger-cb').checked = false;"
+          >
+            Parcours
+          </button>
+          <button
+            onClick="document.getElementById('Photographie').scrollIntoView(); document.getElementById('menu-burger-cb').checked = false;"
+          >
+            Photographie
+          </button>
+          <button
+            onClick="document.getElementById('Contact').scrollIntoView(); document.getElementById('menu-burger-cb').checked = false;"
+          >
+            Contact
+          </button>
         </ul>
       </div>
     </nav>
