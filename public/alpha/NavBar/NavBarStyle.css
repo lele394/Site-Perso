@@ -2,12 +2,12 @@
 :root {
   --bg-color: #0c222f;
   --text-color: white;
+  --burger-color: white;
 }
 
 
 
 nav {
-  z-index: 1;
   font-family: "Avenir Next", "Avenir", sans-serif;
 
 
@@ -21,7 +21,7 @@ nav {
 #menu-burger > ul {
   list-style: none;  
   position: fixed;
-
+  z-index: 1;
   top: 0;
   right: 0;
   transform: translate(100%);
@@ -68,36 +68,75 @@ nav {
 
 
 .menu-button {
-  --width: 50px;
-  --height: 3px;
   height: 50px;
   width: 50px;
-  opacity: .3;
 }
 
-#menu-burger {
+#menu-burger-cb {
+  cursor: pointer;
+  z-index: 3;
+  position: fixed;
+  top: 3em;
+  right: 3em;
+  height: 50px;
+  width: 50px;
+  opacity: 0;
+
+}
+
+#burger {
   z-index: 2;
   position: fixed;
-  top: 1em;
-  right: 1em;
-  height: 50px;
+  top: 3em;
+  right: 3em;
   width: 50px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  transform: translate(8px) translateY(-8px);
 }
 
-#menu-burger > span {
+#burger > span {
   display: block;
-  width: var(--width);
-  height: var(--height);
-  background: white;
+  width: 50px;
+  height: 2px;
+  background: var(--burger-color);
+  border-radius: 4px;
+  transform-origin: center center;
+  transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0)
 
 }
 
-#menu-btn:checked {
-  /*height: 1000px;*/
+#menu-burger input:checked + #burger  span:nth-last-child(1) {
+  transform: translate(-17.67px, -17.67px)rotate(-45deg) ;
+}
+
+#menu-burger input:checked + #burger  span:nth-last-child(3) {
+  transform: translate(-17.67px, 17.67px) rotate(45deg);
+}
+
+#menu-burger input:checked + #burger  span:nth-last-child(2) {
+  transform: translate(-100%);
+  opacity: 0;
+}
+
+#menu-burger input:checked  {
+  transform: translate(-18px);
 }
 
 
 
+
+
+
+
+
+
+
+
+
+/*move it move it*/
 #menu-burger input:checked ~ ul{
   transform: none;
 }
