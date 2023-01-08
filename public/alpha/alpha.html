@@ -58,12 +58,12 @@ section :
     <link rel="stylesheet" href="style/alphaStyle.css" />
     <link rel="stylesheet" href="style/Scrollbar.css" />
     <link rel="stylesheet" href="style/footerStyle.css" />
-    
-    <link rel="icon" href="/public/NW-favicon.png">
+
+    <link rel="icon" href="/public/NW-favicon.png" />
     <!-- ================= NAVBAR A REFAIRE ==================
-    <link rel="stylesheet" href="NavBar/NavBarStyle.css"> 
-    <script src="NavBar/NavBar.js" type="module"></script>
+      <script src="NavBar/NavBar.js" type="module"></script>
     -->
+    <link rel="stylesheet" href="NavBar/NavBarStyle.css" />
 
     <!-- link rel="icon" type="image/svg+xml" href="/vite.svg" / -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -85,17 +85,26 @@ section :
       <div id="shuttle"></div>
     </section>
 
-    <!--
-    <div class="NavBar">
-      <div id="NBshuttle"></div>
-      <ul class="NavBarLine">
-        <li id="NBPresentation"><button class="NBButton" onclick="document.getElementById('PresentationSection').scrollIntoView();">Presentation</button></li>
-        <li id="NBCV"><button class="NBButton" onclick="document.getElementById('cv').scrollIntoView();">CV</button></li>
-        <li id="NBParcours"><button class="NBButton" onclick="document.getElementById('parcours').scrollIntoView();">Parcours</button></li>
-        <li id="NBProjets"><button class="NBButton" onclick="document.getElementById('projets').scrollIntoView();">Projets</button></li>
-      </ul>
-    </div>
-    -->
+    <!--burger menu-->
+    <nav>
+      <div id="menu-burger">
+        <input type="checkbox" id="menu-burger"/>
+        <span></span>
+        <span></span>
+        <span></span>
+        
+        <!--Menu-->
+
+        <ul>
+          <h1>Menu</h1>
+          <button>Présentation</button>
+          <button>Projets</button>
+          <button>Parcours</button>
+          <button>Photographie</button>
+          <button>Contact</button>
+        </ul>
+      </div>
+    </nav>
 
     <!--ANIMATED SPACER-->
     <div class="spacers">
@@ -182,8 +191,10 @@ section :
               Passioné d'astronomie et de photographie, je suis actuellement en
               Licence 3 physique fondamentale. Toujours curieux de découvrir de
               nouveau domaines, ce site est pour moi l'occasion de découvrir le
-              webdev. <br> <br> Actuellement à l'UFR-ST de Besancon, je me forme a la
-              méhode scientifique. J'enrichis mes connaissances afin de mieux
+              webdev. <br />
+              <br />
+              Actuellement à l'UFR-ST de Besancon, je me forme a la méhode
+              scientifique. J'enrichis mes connaissances afin de mieux
               comprendre l'univers qui nous entoure.
             </p>
           </div>
@@ -195,27 +206,33 @@ section :
       <section class="ProjectSection" id="Projets">
         <div class="ProjectContainer">
           <h1 class="ProjectTitle">PROJETS EN COURS ET REALISES</h1>
-          <p>Card en cours de redesign, prototypes en cours disponible dans la CSS playground (dernière card) en dernier <a href="/public/playground/playground.html#s7"> ICI !</a>.  Images a refaire .</p>
+          <p>
+            Card en cours de redesign, prototypes en cours disponible dans la
+            CSS playground (dernière card) en dernier
+            <a href="/public/playground/playground.html#s7"> ICI !</a>. Images a
+            refaire .
+          </p>
           <div class="ProjectCardsContainer">
-
-
-            <div class="project-card" style="--image-link: url(../img/CellAutomatonImg.jpg)">
-
+            <div
+              class="project-card"
+              style="--image-link: url(../img/CellAutomatonImg.jpg)"
+            >
               <div class="card-content">
                 <h1>Cellular Automaton</h1>
                 <div class="description-container">
                   <p>
-                    Un automate cellulaire est une simulation constitué de cellules
-                possédant un état. On peut a l'aide d'un set de règles
-                mathématiques simple, obtenir des comportements complexes.
-                <br />
-                <br />Projet en python et GLSL
+                    Un automate cellulaire est une simulation constitué de
+                    cellules possédant un état. On peut a l'aide d'un set de
+                    règles mathématiques simple, obtenir des comportements
+                    complexes.
+                    <br />
+                    <br />Projet en python et GLSL
                   </p>
-                  <a href="Projects/CellularAutomaton.html" class="card-button">Find more...</a>
+                  <a href="Projects/CellularAutomaton.html" class="card-button"
+                    >Find more...</a
+                  >
                 </div>
-      
               </div>
-              
             </div>
             <!--
             <div class="Card" id="CellularAutomaton">
@@ -233,29 +250,31 @@ section :
               >
             </div>-->
 
-
-            <div class="project-card" style="--image-link: url(../img/CSSCalculator.png)">
-
+            <div
+              class="project-card"
+              style="--image-link: url(../img/CSSCalculator.png)"
+            >
               <div class="card-content">
                 <h1>Calculatrice CSS</h1>
                 <div class="description-container">
                   <p>
-                    Projet réalisé comme petit challenge en CSS/HTML. Il présente
-                une faille de sécurité majeur avec l'utilisation de la fonction
-                eval(), pouvant permettre l'exécution de code malicieux <br />
-                <br />
-                Projet en CSS/Js/HTML
+                    Projet réalisé comme petit challenge en CSS/HTML. Il
+                    présente une faille de sécurité majeur avec l'utilisation de
+                    la fonction eval(), pouvant permettre l'exécution de code
+                    malicieux <br />
+                    <br />
+                    Projet en CSS/Js/HTML
                   </p>
-                  <a href="https://codepen.io/lele394/full/NWzyYqP" class="card-button">Find more...</a>
+                  <a
+                    href="https://codepen.io/lele394/full/NWzyYqP"
+                    class="card-button"
+                    >Find more...</a
+                  >
                 </div>
-      
               </div>
-              
-            
             </div>
 
-
-<!--
+            <!--
             <div class="Card" id="CalculatriceCSS">
               <img class="CardImage" src="img/CSSCalculator.png" alt="" />
               <h1 class="CardTitle">Calculatrice CSS</h1>
@@ -273,33 +292,32 @@ section :
               >
             </div>-->
 
-
-
-            <div class="project-card" style="--image-link: url(../img/GLSL.png)">
-
+            <div
+              class="project-card"
+              style="--image-link: url(../img/GLSL.png)"
+            >
               <div class="card-content">
                 <h1>GLSL/HLSL Shader</h1>
                 <div class="description-container">
                   <p>
                     Ce projet a pour but d'explorer la génération de texture
-                procédurale à l'aide du
-                <a
-                  style="color: #ffffff"
-                  href="https://en.wikipedia.org/wiki/Perlin_noise"
-                  >bruit de perlin</a
-                >. La manipulation de texture nécessitent l'utilisation d'un
-                compute shader. <br /><br />
-                Projet en HLSL/GLSL
+                    procédurale à l'aide du
+                    <a
+                      style="color: #ffffff"
+                      href="https://en.wikipedia.org/wiki/Perlin_noise"
+                      >bruit de perlin</a
+                    >. La manipulation de texture nécessitent l'utilisation d'un
+                    compute shader. <br /><br />
+                    Projet en HLSL/GLSL
                   </p>
-                  <a href="Projects/Construction.html" class="card-button">Find more...</a>
+                  <a href="Projects/Construction.html" class="card-button"
+                    >Find more...</a
+                  >
                 </div>
-      
               </div>
-              
-            
             </div>
 
-<!--
+            <!--
             <div class="Card" id="GLSL">
               <img class="CardImage" src="img/GLSL.png" alt="" />
               <h1 class="CardTitle">GLSL/HLSL Shader</h1>
@@ -319,8 +337,10 @@ section :
                 >Détails...</a
               >
             </div>-->
-            <div class="project-card" style="--image-link: url(../img/CitaDiscordBot.png)">
-
+            <div
+              class="project-card"
+              style="--image-link: url(../img/CitaDiscordBot.png)"
+            >
               <div class="card-content">
                 <h1>Cita, Discord Bot</h1>
                 <div class="description-container">
@@ -332,12 +352,11 @@ section :
                     <br />
                     Projet en Python
                   </p>
-                  <a href="Projects/Construction.html" class="card-button">Find more...</a>
+                  <a href="Projects/Construction.html" class="card-button"
+                    >Find more...</a
+                  >
                 </div>
-      
               </div>
-              
-            
             </div>
 
             <!--
@@ -357,53 +376,52 @@ section :
               >
             </div>-->
 
-            <div class="project-card" style="--image-link: url(../img/CSSPlayground.png)">
-
+            <div
+              class="project-card"
+              style="--image-link: url(../img/CSSPlayground.png)"
+            >
               <div class="card-content">
                 <h1>CSS Playground</h1>
                 <div class="description-container">
                   <p class="CardText">
                     une page recensant certains projets CSS/HTML
-                <br />
-                <br />
-                <br />
-                <br />
-                    <br>
-                Projet en HTML/CSS/PYTHON
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    Projet en HTML/CSS/PYTHON
                   </p>
-                  <a href="/public/playground/playground.html" class="card-button">Find more...</a>
+                  <a
+                    href="/public/playground/playground.html"
+                    class="card-button"
+                    >Find more...</a
+                  >
                 </div>
-      
               </div>
-              
-            
             </div>
 
-
-
-
-
-
-            <div class="project-card" style="--image-link: url(../img/HTMLClock.png)">
-
+            <div
+              class="project-card"
+              style="--image-link: url(../img/HTMLClock.png)"
+            >
               <div class="card-content">
                 <h1>Horloge</h1>
                 <div class="description-container">
                   <p class="CardText">
-                    Horloge en HTML/CSS piloté par javascript. Elle possède un switch pour activer ou désactiver un theme light
-                <br />
-                <br />
-                    <br>
-                Projet en HTML/CSS/JS
+                    Horloge en HTML/CSS piloté par javascript. Elle possède un
+                    switch pour activer ou désactiver un theme light
+                    <br />
+                    <br />
+                    <br />
+                    Projet en HTML/CSS/JS
                   </p>
-                  <a href="/public/clock/clock.html" class="card-button">Find more...</a>
+                  <a href="/public/clock/clock.html" class="card-button"
+                    >Find more...</a
+                  >
                 </div>
-      
               </div>
-              
-            
             </div>
-
 
             <!--
             <div class="Card" id="Playground">
@@ -426,13 +444,6 @@ section :
           </div>
         </div>
       </section>
-
-
-
-
-
-
-
 
       <div class="spacerProjParcours"></div>
 

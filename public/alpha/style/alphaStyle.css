@@ -555,6 +555,7 @@ section {
 
 .InstaCarousel {
   position: relative;
+  z-index:0;
 }
 
 .InstaCarouselContainer {
