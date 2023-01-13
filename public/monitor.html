@@ -32,7 +32,15 @@
         <p>Physical Cores : <span id="physicalCores"> unknown </span></p>
         <p>Speed : <span id="speed"> unknown </span> GHz</p>
         <p>Load : <span id="load"> unknown </span> %</p>
-
+        <!--LOAD BAR-->
+        <div id="cpu-bar" class="bar-main-container blue">
+            <div class="wrap">
+              <div class="bar-percentage" id="cpu-bar-percentage">0</div>
+              <div class="bar-container">
+                <div class="bar" id="cpu-bar-perc" style="--perc: 0%;"></div>
+              </div>
+            </div>
+          </div>
         <button onclick="Get('Load')">Refresh load</button>
         
 
@@ -43,6 +51,17 @@
         <div class="underline"></div>
         <p>Total : <span id="total"> unknown </span></p>
         <p>Used : <span id="used"> unknown </span></p>
+
+        <!--MEM BAR-->
+        <div id="mem-bar" class="bar-main-container blue">
+            <div class="wrap">
+              <div class="bar-percentage" id="mem-bar-percentage">0</div>
+              <div class="bar-container">
+                <div class="bar" id="mem-bar-perc" style="--perc: 0%;"></div>
+              </div>
+            </div>
+          </div>
+
         <button onclick="Get('Mem')">Refresh infos</button>
     </section>
 
@@ -50,7 +69,15 @@
         <h1>Temperatures infos</h1>
         <div class="underline"></div>
         <p>Temp : <span id="temps"> unknown </span></p>
-
+        <!--TEMP BAR-->
+        <div id="temp-bar" class="bar-main-container blue">
+            <div class="wrap">
+              <div class="bar-percentage" id="temp-bar-percentage">0</div>
+              <div class="bar-container">
+                <div class="bar" id="temp-bar-perc" style="--perc: 0%;"></div>
+              </div>
+            </div>
+          </div>
         <button onclick="Get('Temps')">Refresh infos</button>
     </section>
 
@@ -70,6 +97,12 @@
 
     let socket = io();
     console.log("connection successful")
+
+    //Colors for bars :
+    let blue = "#5dd0f0";
+    let green = "#5df05d";
+    let orange = "#f0a65d";
+    let red = "#f05d84";
     
 
     function Get(flag) {
@@ -93,6 +126,26 @@
         console.log("Temps");
         console.log(data);
         UpdateElement("temps", data.main);
+
+        let perc = data.main/100;
+        let bar_bg = document.getElementById("temp-bar");
+        if(perc <35/100){
+            bar_bg.style.background = blue;
+        } else {
+            if(perc < 45/100) {
+                bar_bg.style.background = green;
+            } else {
+                if(perc < 55/100) {
+                bar_bg.style.background = orange;
+            } else {
+                bar_bg.style.background = red;
+            }
+            }
+        }
+
+        perc = perc*100;
+        UpdateElement("temp-bar-percentage", perc.toFixed(1));
+        document.getElementById("temp-bar-perc").style.setProperty('--perc', perc + "%")
     });
 
     //OS
@@ -112,6 +165,26 @@
         console.log(data);
         UpdateElement("load", data.currentLoad);
 
+        let perc = data.currentLoad/100;
+        let bar_bg = document.getElementById("cpu-bar");
+        if(perc <3/10){
+            bar_bg.style.background = blue;
+        } else {
+            if(perc < 6/10) {
+                bar_bg.style.background = green;
+            } else {
+                if(perc < 8/10) {
+                bar_bg.style.background = orange;
+            } else {
+                bar_bg.style.background = red;
+            }
+            }
+        }
+
+        perc = perc*100;
+        UpdateElement("cpu-bar-percentage", perc.toFixed(1));
+        document.getElementById("cpu-bar-perc").style.setProperty('--perc', perc + "%")
+
     });
 
     //RAM/MEM
@@ -120,6 +193,28 @@
         console.log(data);
         UpdateElement("total", data.total);
         UpdateElement("used", data.used);
+        
+        let perc = data.used/data.total;
+        let bar_bg = document.getElementById("mem-bar");
+        if(perc <3/10){
+            bar_bg.style.background = blue;
+        } else {
+            if(perc < 6/10) {
+                bar_bg.style.background = green;
+            } else {
+                if(perc < 8/10) {
+                bar_bg.style.background = orange;
+            } else {
+                bar_bg.style.background = red;
+            }
+            }
+        }
+
+        perc = perc*100;
+        UpdateElement("mem-bar-percentage", perc.toFixed(1));
+        document.getElementById("mem-bar-perc").style.setProperty('--perc', perc + "%")
+
+        
 
     });
 
