@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="monitorStyle.css">
+</head>
+<body>
+    
+    <section id="OS">
+        <h1>OS infos</h1>
+        <div class="underline"></div>
+        <p>Platform : <span id="platform"> unknown </span></p>
+        <p>Distro : <span id="distro"> unknown </span></p>
+        <p>Architecture : <span id="arch"> unknown </span>  </p>
+        <p>Kernel : <span id="kernel"> unknown </span></p>
+        <p>Host name : <span id="hostname"> unknown </span></p>
+    </section>
+
+    <section id="CPU">
+        <h1>CPU infos</h1>
+        <div class="underline"></div>
+        <p>Manufacturer : <span id="manufacturer"> unknown </span></p>
+        <p>Brand : <span id="brand"> unknown </span></p>
+        <p>Cores : <span id="cores"> unknown </span></p>
+        <p>Family : <span id="family"> unknown </span></p>
+        <p>Model : <span id="model"> unknown </span></p>
+        <p>Performance Cores : <span id="performanceCores"> unknown </span></p>
+        <p>Physical Cores : <span id="physicalCores"> unknown </span></p>
+        <p>Speed : <span id="speed"> unknown </span> GHz</p>
+        <p>Load : <span id="load"> unknown </span> %</p>
+
+        <button onclick="Get('Load')">Refresh load</button>
+        
+
+    </section>
+
+    <section id="Mem">
+        <h1>Ram infos</h1>
+        <div class="underline"></div>
+        <p>Total : <span id="total"> unknown </span></p>
+        <p>Used : <span id="used"> unknown </span></p>
+        <button onclick="Get('Mem')">Refresh infos</button>
+    </section>
+
+    <section id="Temps">
+        <h1>Temperatures infos</h1>
+        <div class="underline"></div>
+        <p>Temp : <span id="temps"> unknown </span></p>
+
+        <button onclick="Get('Temps')">Refresh infos</button>
+    </section>
+
+
+    <section id="Net">
+        <h1>Network/Wifi infos</h1>
+        <div class="underline"></div>
+        <p>See logged objects under Net and Wifi for detailed infos</p>
+    </section>
+
+
+
+
+
+
+    <script>
+
+    let socket = io();
+    console.log("connection successful")
+    
+
+    function Get(flag) {
+        console.log("asked for : "+flag);
+        socket.emit("GetMonitorData",
+        {
+            message: flag,
+        });
+    }
+
+    Get("All");
+
+    function UpdateElement(id, text) {
+        document.getElementById(id).innerHTML = text;
+    }
+
+
+
+    //temps
+    socket.on('Temps', (data) => {
+        console.log("Temps");
+        console.log(data);
+        UpdateElement("temps", data.main);
+    });
+
+    //OS
+    socket.on('OS', (data) => {
+        console.log("OS");
+        console.log(data);
+        UpdateElement("platform", data.platform);
+        UpdateElement("distro", data.distro);
+        UpdateElement("arch", data.arch);
+        UpdateElement("kernel", data.kernel);
+        UpdateElement("hostname", data.hostname);
+    });
+
+    //Load
+    socket.on('Load', (data) => {
+        console.log("Load");
+        console.log(data);
+        UpdateElement("load", data.currentLoad);
+
+    });
+
+    //RAM/MEM
+    socket.on('Mem', (data) => {
+        console.log("Mem");
+        console.log(data);
+        UpdateElement("total", data.total);
+        UpdateElement("used", data.used);
+
+    });
+
+    //CPU
+    socket.on('Cpu', (data) => {
+        console.log("Cpu");
+        console.log(data);
+        UpdateElement("manufacturer", data.manufacturer);
+        UpdateElement("brand", data.brand);
+        UpdateElement("cores", data.cores);
+        UpdateElement("family", data.family);
+        UpdateElement("model", data.model);
+        UpdateElement("performanceCores", data.performanceCores);
+        UpdateElement("physicalCores", data.physicalCores);
+        UpdateElement("speed", data.speed);
+    });
+
+    //Network
+    socket.on('Net', (data) => {
+        console.log("Net");
+        console.log(data);
+    });
+
+    //Wifi
+    socket.on('Wifi', (data) => {
+        console.log("Wifi");
+        console.log(data);
+    });
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

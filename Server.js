@@ -1,7 +1,11 @@
 var express = require("express"), app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-const path = require('path')
+const path = require('path');
+
+//to get system infos
+const si = require('systeminformation');
+
 
 
 
@@ -21,7 +25,7 @@ const IPLogger = function LogIp(req, res, next) {
   }
   next();
 }
-app.use(IPLogger)//commet to disable
+//app.use(IPLogger)//comment to disable
 
 
 const port = 3000;
@@ -68,6 +72,62 @@ io.on('connection', (socket) => {
   console.log(`A user connected with id ${socket.id} from ` + address);
   clients.push(socket.id);
   io.emit('consoleUpdate', {message: `connected with id ${socket.id} from ` + address})
+
+
+  //for monitor page
+  socket.on('GetMonitorData', function(data) {
+  
+    if(data.message == "Temps"){
+      si.cpuTemperature().then(data => io.emit("Temps", data));
+    }
+
+    if(data.message == "OS"){
+      si.osInfo().then(data => io.emit("OS", data));
+    }
+
+    if(data.message == "Load"){
+      si.currentLoad().then(data => io.emit("Load", data));
+    }
+
+    if(data.message == "Cpu"){
+      si.cpu().then(data => io.emit("Cpu", data));
+    }
+
+    if(data.message == "Mem"){
+      si.mem().then(data => io.emit("Mem", data));
+    }
+
+    if(data.message == "Net"){
+      si.networkInterfaces().then(data => io.emit("Net", data));
+    }
+
+    if(data.message == "Wifi"){
+      si.wifiNetworks().then(data => io.emit("Wifi", data));
+    }
+
+    if(data.message == "All"){
+      si.cpuTemperature().then(data => io.emit("Temps", data));
+      si.osInfo().then(data => io.emit("OS", data));
+      si.currentLoad().then(data => io.emit("Load", data));
+      si.cpu().then(data => io.emit("Cpu", data));
+      si.mem().then(data => io.emit("Mem", data));
+      si.networkInterfaces().then(data => io.emit("Net", data));
+      si.wifiNetworks().then(data => io.emit("Wifi", data));
+    }
+
+
+  });
+
+
+
+
+
+
+
+
+
+
+
 
 
   socket.on('StatusUpdate', function(data) {
