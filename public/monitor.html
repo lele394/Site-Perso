@@ -92,11 +92,12 @@
 
 
 
-
     <script>
 
     let socket = io();
     console.log("connection successful")
+
+    var auto = false;
 
     //Colors for bars :
     let blue = "#5dd0f0";
@@ -246,8 +247,17 @@
 
 
 
+    function Auto_refresh () {
+
+        Get("Load");
+        Get("Mem");
+        Get("Temps");
 
 
+    }
+
+
+    setInterval(Auto_refresh, 15000);
 
 
 
