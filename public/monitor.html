@@ -193,9 +193,9 @@
         console.log("Mem");
         console.log(data);
         UpdateElement("total", data.total);
-        UpdateElement("used", data.used);
+        UpdateElement("used", data.active);
         
-        let perc = data.used/data.total;
+        let perc = data.active/data.total;
         let bar_bg = document.getElementById("mem-bar");
         if(perc <3/10){
             bar_bg.style.background = blue;
